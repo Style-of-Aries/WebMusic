@@ -1,18 +1,16 @@
 <?php
-require_once "./../config/database.php";
-class AdminModel {
-    private $db;
+require "../config/database.php";
+class adminModel extends database {
+    private $connect;
 
     public function __construct() {
-        $database = new Database();
-        $this->db = $database->connect();
+        $this->connect = $this->connect();
+    }
+
+    public function __query($sql){
+        return mysqli_query($this->connect,$sql);
     }
 
     // Your database connection and methods for admin-related data
-    public function getAllSongs() {
-        $query = "SELECT * FROM songs";
-        $stmt = $this->db->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+    
 }

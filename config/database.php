@@ -1,19 +1,22 @@
 <?php
-class Database {
-    private $host = 'localhost';
-    private $dbName = 'webmusic';
-    private $username = 'root';
-    private $password = '';
+class database{
+    const HOST = 'localhost';
+    const USERNAME = 'root';
+    const PASSWORD = '';
+    const DB_NAME = 'webmusic';
+    
 
-    public function connect() {
-        $dsn = "mysql:host=$this->host;dbname=$this->dbName;charset=utf8mb4";
-        try {
-            $pdo = new PDO($dsn, $this->username, $this->password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-            return null;
+
+    public function connect(){
+        $connect= mysqli_connect(self::HOST,self::USERNAME,self::PASSWORD,self::DB_NAME);
+        mysqli_set_charset($connect,"utf8");
+
+        if(mysqli_connect_errno() === 0){
+            return $connect;
+        }else{
+            return false;
+
         }
     }
 }
+?>

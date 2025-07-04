@@ -3,6 +3,9 @@ body {
     background: radial-gradient(circle at center, #330000 0%, #0d0d0d 100%);
     color: #fff;
 }
+.error{
+    color: red;
+}
 
 .khung {
     width: 500px;
