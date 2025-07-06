@@ -1,19 +1,18 @@
 :root {
   --layout-bg: #37075d;
   --layout-header-bg: rgba(55, 7, 93, 0.8);
-  --queue-player-popup-bg: #5d218c;
+  --queue-player-popup-bg: #2f054e;
   --purple-primary: #ed2b91;
   --primary-bg: #4b1178;
   --sidebar-popup-bg: #572f90;
 }
 body {
   font-family: Arial, sans-serif;
-  background-color: var(--primary-bg);
   color: #fff;
   overflow: hidden;
   height: 100vh;
   margin: 0;
-  display: flex;
+  background-color: var(--layout-bg);
 }
 .logoWeb img {
   width: 70px;
@@ -53,21 +52,23 @@ body {
   width: 0;
   transition: opacity 0.3s, width 0.3s;
 }
-/* #toggle-menu:checked ~ .container {
+#toggle-menu:checked ~ .container {
+  margin-left: 60px;
+  width: calc(100% - 60px);
+  transition: margin-left 0.3s, width 0.3s;
+}
+#toggle-menu:checked ~ .container .avatarUser{
+  transition: margin-right 0.3s;
+}
+#toggle-menu:checked ~ .container .header {
+  width: calc(100% - 60px);
+  transition: width 0.3s;
+}
+/* #toggle-menu:checked ~ .container .mainContent {
   margin-left: 60px;
   width: calc(100% - 60px);
   transition: margin-left 0.3s, width 0.3s;
 } */
-#toggle-menu:checked ~ .container .header {
-  left: 60px;
-  width: calc(100% - 60px);
-  transition: left 0.3s, width 0.3s;
-}
-#toggle-menu:checked ~ .container .mainContent {
-  margin-left: 60px;
-  width: calc(100% - 60px);
-  transition: margin-left 0.3s, width 0.3s;
-}
 
 /* #toggle-menu:checked ~ .player {
   left: 60px;
@@ -169,13 +170,12 @@ body {
 .container {
   display: flex;
   flex-direction: column;
-  /* margin-left: 200px;
+  margin-left: 200px;
   width: calc(100% - 200px);
-  transition: margin-left 0.3s, width 0.3s; */
+  transition: margin-left 0.3s, width 0.3s;
 }
 .header {
   height: 60px;
-  background: var(--layout-header-bg);
   color: white;
   display: flex;
   align-items: center;
@@ -183,9 +183,10 @@ body {
   padding: 0 20px;
   position: fixed;
   top: 0;
-  left: 200px; /* Bắt đầu từ vị trí của sidebar */
-  width: calc(100% - 200px); /* Chiều rộng trừ sidebar */
-  transition: left 0.3s, width 0.3s;
+  width: calc(100% - 200px);
+  transition: width 0.3s;
+  background-color: var(--queue-player-popup-bg);
+  
 }
 .header .homeSearch {
   position: relative;
@@ -220,15 +221,30 @@ body {
 .header .avatarUser {
   margin-right: 30px;
 }
+.header .avatarUser img {
+  width: 50px;
+  height: auto;
+  border-radius: 50%;
+}
 .mainContent {
   margin-top: 60px;
   overflow-y: auto;
-  background-color: var(--primary-bg);
+  
   padding: 10px;
   color: white;
-  width: calc(100% - 200px);
-  margin-left: 200px;
-  transition: margin-left 0.3s, width 0.3s;
+  width: 100%;
+}
+table {
+  border: 1px solid #fff;
+  padding: 10px;
+}
+table th {
+  border: 1px solid #fff;
+  padding: 10px;
+}
+table td {
+  border: 1px solid #fff;
+  padding: 10px;
 }
 .playSongs {
   position: fixed;
@@ -236,7 +252,7 @@ body {
   left: 0;
   width: 100%;
   height: 80px; /* hoặc chiều cao bạn muốn */
-  background: #420a65;
+  background: var(--queue-player-popup-bg);
   color: white;
   display: flex;
   align-items: center;

@@ -4,6 +4,6 @@
         <i class="fas fa-search"></i>
     </div>
     <div class="avatarUser">
-        ádnajsnfjlnd
+        <a href="index.php?controller=user&action=index"><img src="<?= BASE_URL ?>img/avatar.jpg" alt="avatar"></a>
     </div>
 </div>

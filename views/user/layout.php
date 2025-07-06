@@ -19,16 +19,22 @@
                 <div class="contentHeader">
                     <h2>Danh sách bài hát</h2>
                     <div class="playlist-container">
-                        <!-- <?php foreach ($songs as $song): ?>
-                            <div class="playlist-card">
-                                <div class="cover">
-                                    <img src="<?= $song['cover_image'] ?? 'default.jpg' ?>" alt="Cover">
-                                    <div class="play-button">▶</div>
-                                </div>
-                                <h3><?= htmlspecialchars($song['title']) ?></h3>
-                                <p><?= htmlspecialchars($song['description'] ?? 'Chưa có mô tả...') ?></p>
-                            </div>
-                        <?php endforeach; ?> -->
+                        <table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên bài hát</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                        <?php foreach ($songs as $song): ?>
+                            
+                                <tr>
+                                    <td><?= $song['id']?></td>
+                                    <td><?= $song['name']?></td>
+                                    <td><?= $song['release_date']?></td>
+                                </tr>
+                            
+                        <?php endforeach; ?>
+                        </table>
                     </div>
                 </div>
             </div>
