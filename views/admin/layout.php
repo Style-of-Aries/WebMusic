@@ -268,7 +268,7 @@
 <body>
     <div class="layout">
         <div class="sidebar">
-            <!-- <img src="../../admin/1/img/php.png" alt="logo" class="logo"> -->
+            <img src="./../admin/1/img/php.png" alt="logo" class="logo">
             <ul class="menu">
                 <li>
                     <a href="index.php?controller=admin&action=index" class="menu-link">
