@@ -1,11 +1,9 @@
 <div class="header">
-    <div class="logo">
-        <a href="index.php?controller=admin&action=index"><img src="./img/logoT1.jpg" alt="Logo T1 MP3"></a>
-    </div>
-    <div class="homeSearch">icon home
-        <input type="text" placeholder="Search...">
+    <div class="homeSearch">
+        <input type="text" placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát...">
+        <i class="fas fa-search"></i>
     </div>
     <div class="avatarUser">
-        <img src="./img/avatar.jpg" alt="Avatar User">
+        ádnajsnfjlnd
     </div>
 </div>

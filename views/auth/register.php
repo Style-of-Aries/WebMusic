@@ -1,17 +1,11 @@
-<style>
-    .error{
-    color: red;
-    margin-left: 98px;
-    margin-bottom: 10px;
-}
-</style>
-<link rel="stylesheet" href="./css/register.css">
-<link rel="stylesheet" href="./css/loginBtn.css">
+<?php require_once __DIR__ . "/../../config/config.php"; ?>
+<link rel="stylesheet" href="<?= BASE_URL ?>css/auth.css">
+<link rel="stylesheet" href="<?= BASE_URL ?>css/styles.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </style>
 <div class="khung">
     <div class="logoWeb">
-        <img src="./img/logoT1.jpg" alt="">
+        <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
     </div>
     <h2>Đăng ký tài khoản</h2>
     <form action="index.php?action=auth_register" method="post">
