@@ -9,5 +9,8 @@ class userModel extends database
     {
         $this->connect= $this->connect();
     }
+    public function getSongs(){
+        
+    }
 
 }
