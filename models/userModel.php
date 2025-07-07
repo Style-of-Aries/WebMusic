@@ -12,5 +12,4 @@ class userModel
     public function getSongs() {
         return $this->connect->query("select * from albums")->fetchAll(PDO::FETCH_ASSOC);
     }
-
 }
