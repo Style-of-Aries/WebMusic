@@ -20,20 +20,22 @@
                     <h2>Danh sách bài hát</h2>
                     <div class="playlist-container">
                         <table>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Tên bài hát</th>
-                                    <th>Ngày tạo</th>
-                                </tr>
-                        <?php foreach ($songs as $song): ?>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tên bài hát</th>
+                                <th>Ngày tạo</th>
+                            </tr>
                             
-                                <tr>
-                                    <td><?= $song['id']?></td>
-                                    <td><?= $song['name']?></td>
-                                    <td><?= $song['release_date']?></td>
-                                </tr>
-                            
-                        <?php endforeach; ?>
+                            <tbody>
+                                <?php foreach ($songs as  $song): ?>
+                                    <tr>
+                                        <td><?= $song['id']   ?></td>
+                                        <td><?= htmlspecialchars($song['name']) ?></td>
+                                        <td><?= htmlspecialchars($song['release_date']) ?></td>
+            
+                                    </tr>
+                                <?php endforeach ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
