@@ -1,0 +1,49 @@
+
+.khung {
+  width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #6a0dad;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+form input {
+  width: 80%;
+  padding: 10px;
+  margin: 5px auto;
+  border: none;
+  border-radius: 999px;
+  background: #4c167c;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+form button {
+  width: 80%;
+  padding: 10px;
+  margin: 10px auto;
+  border: none;
+  border-radius: 999px;
+  background: #ff2e92;
+  color: #fff;
+  cursor: pointer;
+}
+p {
+  margin-top: 10px;
+  color: #fff;
+}
+p a {
+  color: #ff2e92;
+}
+.error {
+  color: red;
+  margin-left: 88px;
+  margin-bottom: 10px;
+}

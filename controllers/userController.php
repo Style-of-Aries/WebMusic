@@ -1,15 +1,12 @@
 <?php
-require_once "./../models/userModel.php";
-
-class userController{
+require_once '../models/userModel.php';
+class UserController {
     private $userModel;
-    public function __construct()
-    {
-        $this->userModel= new userModel();
+    public function __construct() {
+        $this->userModel = new UserModel();
     }
-
-    public function index(){
+    public function index() {
+        $songs = $this->userModel->getSongs();
         require_once './../views/user/layout.php';
-
     }
 }

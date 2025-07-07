@@ -6,5 +6,5 @@ $content = ob_start();
 
 <?php
 $content = ob_get_clean();
-include './../views/admin/layout.php';
+include './../views/user/layout.php';
 ?>
