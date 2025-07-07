@@ -1,6 +1,6 @@
 <?php
-    require_once "./../config/db.php";
-class userModel
+    require_once "./../config/database.php";
+class userModel extends database
 {
 
     private $connect;
@@ -10,7 +10,17 @@ class userModel
         $this->connect = $this->connect();
     }
     public function getSongs() {
-        return $this->connect->query("select * from albums")->fetchAll(PDO::FETCH_ASSOC);
+        $sql="Select * from albums";
+        $query=$this->_query($sql);
+        $data=[];
+        while($row=mysqli_fetch_assoc($query)){
+            array_push($data,$row);
+        }
+        return $data;
+        
+    }
+    public function _query($sql){
+        return mysqli_query($this->connect,$sql);
     }
 
 }
