@@ -1,6 +1,7 @@
 <?php
 require_once '../models/userModel.php';
 class UserController {
+    private $userModel;
     public function __construct() {
         $this->userModel = new UserModel();
     }
