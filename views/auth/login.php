@@ -22,7 +22,7 @@
       <input type="email" name="email" placeholder="Email" required>
       <input type="password" name="password" placeholder="Mật khẩu" required>
       <span class="error"><?php echo $errorLogin ?></span>
-      <button type="submit" name="btnLogin">Đăng nhập</button>
+      <button type="submit" name="btn_login">Đăng nhập</button>
     </form>
     <!-- <button class="login-btn google">
       <i class="fab fa-google"></i> Tiếp tục bằng Google
