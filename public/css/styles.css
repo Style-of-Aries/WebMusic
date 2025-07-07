@@ -64,15 +64,7 @@ body {
   width: calc(100% - 60px);
   transition: width 0.3s;
 }
-/* #toggle-menu:checked ~ .container .mainContent {
-  margin-left: 60px;
-  width: calc(100% - 60px);
-  transition: margin-left 0.3s, width 0.3s;
-} */
 
-/* #toggle-menu:checked ~ .player {
-  left: 60px;
-} */
 .sidebar {
   width: 200px;
   background-color: var(--sidebar-popup-bg);
@@ -83,11 +75,7 @@ body {
   transition: width 0.3s;
   color: white;
 }
-/* .sidebar-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
+
  .sidebar-content .nav-ul{
   padding: 0;
   margin: 0;
@@ -112,61 +100,6 @@ body {
   background-color: var(--primary-bg);
 }
 
-.header {
-  height: 60px;
-  background: #420A65;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-}
-
-.header .homeSearch {
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.header .homeSearch input {
-  font-size: 16px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #fff;
-  color: #333;
-}
-.header .homeSearch i {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-  color: #333;
-cursor: pointer;
-}
-
-.mainContent {
-  margin-top: 60px; 
-  overflow-y: auto;
-  background-color: var(--primary-bg);
-  padding: 10px;
-  color: white;
-} */
-
-/* .playSongs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: #420a65;
-} */
 .container {
   display: flex;
   flex-direction: column;
