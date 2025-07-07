@@ -18,6 +18,7 @@ class authController
     }
     public function auth_login(){
         $errorLogin="";
+        echo "<br>". __METHOD__;
         if(isset($_POST['btn_login'])){
             $emailLogin=$_POST['email'];
             $passLogin=$_POST['password'];
@@ -25,12 +26,15 @@ class authController
                 header('location:index.php?controller=admin&action=index');
             }
             $user=$this->authModel->authUsersLogin($emailLogin,$passLogin);
+            // var_dump($user);
             if($user){
                 header('location:index.php?controller=user&action=index');
             }else{
                 $errorLogin="Thông tin tài khoản mật khẩu không chính xác";
                 include_once "./../views/auth/login.php";
             }
+                // header('location:index.php?controller=user&action=index');
+            
         }
     }
 
