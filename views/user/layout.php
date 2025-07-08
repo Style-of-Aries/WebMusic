@@ -20,11 +20,11 @@
                 <div class="contentHeader">
                     <h2>Danh sách bài hát</h2>
                     <div class="playlist-container">
-                        <table>
+                        <table class="song-table">
                             <tr>
                                 <th>ID</th>
                                 <th>Tên bài hát</th>
-                                <th>Ngày tạo</th>
+                                <th>Tác giả</th>
                             </tr>
                             
                             <tbody>
@@ -32,7 +32,7 @@
                                     <tr>
                                         <td><?= $song['id']   ?></td>
                                         <td><?= htmlspecialchars($song['name']) ?></td>
-                                        <td><?= htmlspecialchars($song['release_date']) ?></td>
+                                        <td><?= htmlspecialchars($song['artist']) ?></td>
             
                                     </tr>
                                 <?php endforeach ?>

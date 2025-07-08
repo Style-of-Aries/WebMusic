@@ -1,35 +1,48 @@
-const songs = [
-    {
-        id: 1,
-        title: "Em chỉ là",
-        file: "ecl.mp3",
-        image: "ecl.jpg",
-    },
-    {
-        id: 2,
-        title: "Gã săn cá",
-        file: "gsc.mp3",
-        image: "gsc.jpg",
-    },
-    {
-        id: 3,
-        title: "Không đau nữa rồi",
-        file: "kdnr.mp3",
-        image: "kdnr.jpg",
-    },
-    {
-        id: 4,
-        title: "Phép màu",
-        file: "pm.mp3",
-        image: "pm.jpg",
-    },
-    {
-        id: 5,
-        title: "Nhắn nhủ",
-        file: "nn.mp3",
-        image: "nn.jpg",
-    },
-];
+let songs = [];
+
+fetch("../api/getSongs.php") // đường dẫn phù hợp với vị trí file JS của bạn
+    .then(res => res.json())
+    .then(data => {
+        songs = data;
+        console.log("Danh sách bài hát:", songs);
+        vitribai = 0; // đảm bảo gán trước
+        khoitaoSong(vitribai); // ✅ truyền đúng tham số
+    })
+
+    .catch(error => console.error("Lỗi khi lấy danh sách bài hát:", error));
+
+// const songs = [
+//     {
+//         id: 1,
+//         title: "Em chỉ là",
+//         file: "ecl.mp3",
+//         image: "ecl.jpg",
+//     },
+//     {
+//         id: 2,
+//         title: "Gã săn cá",
+//         file: "gsc.mp3",
+//         image: "gsc.jpg",
+//     },
+//     {
+//         id: 3,
+//         title: "Không đau nữa rồi",
+//         file: "kdnr.mp3",
+//         image: "kdnr.jpg",
+//     },
+//     {
+//         id: 4,
+//         title: "Phép màu",
+//         file: "pm.mp3",
+//         image: "pm.jpg",
+//     },
+//     {
+//         id: 5,
+//         title: "Nhắn nhủ",
+//         file: "nn.mp3",
+//         image: "nn.jpg",
+//     },
+// ];
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const music = document.getElementById("music");
@@ -38,6 +51,7 @@ const rangeAudio = document.getElementById("rangeAudio");
 const timeSong = document.getElementById("timeSong");
 const timeChay = document.getElementById("timeChay");
 const nameSong = document.getElementById("nameSong");
+const nameArtist = document.getElementById("nameArtist");
 const imgSong = document.getElementById("imgSong");
 const repeatBtn = document.getElementById("repeatBtn");
 const randomBtn = document.getElementById("randomBtn");
@@ -61,7 +75,7 @@ rangeAudio.addEventListener("change", xulyrangeAudio);
 repeatBtn.addEventListener("click", onOffRepeat);
 randomBtn.addEventListener("click", onOffRandom);
 rangeVolume.addEventListener('input', function () {
-  music.volume = this.value / 100;
+    music.volume = this.value / 100;
 });
 volumeBtn.addEventListener("click", tatTieng);
 function playPause() {
@@ -94,7 +108,11 @@ function doibai(dir) {
     }
     khoitaoSong(vitribai);
     playPause();
-    console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
+    // console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
+    if (songs[vitribai]) {
+        console.log("Bài hiện tại:", vitribai, songs[vitribai].fileSong);
+    }
+
 }
 function displayTime() {
     const { duration, currentTime } = music;
@@ -112,14 +130,29 @@ function formatTime(time) {
     const giay = Math.floor(time - phut * 60);
     return `${phut < 10 ? "0" + phut : phut}:${giay < 10 ? "0" + giay : giay}`;
 }
+// function khoitaoSong(vitribai) {
+//     nameSong.textContent = songs[vitribai].name;
+//     music.setAttribute("src", `/WebMusic/public/uploads/music/${songs[vitribai].fileSong}`);
+//     imgSong.setAttribute("src", `/WebMusic/public/uploads/img/${songs[vitribai].image}`);
+
+// }
 function khoitaoSong(vitribai) {
-    nameSong.textContent = songs[vitribai].title;
-    music.setAttribute("src", `/WebMusic/public/uploads/music/${songs[vitribai].file}`);
-    imgSong.setAttribute("src", `/WebMusic/public/uploads/img/${songs[vitribai].image}`);
+    const song = songs[vitribai];
+
+    if (!song) {
+        console.error("Không tìm thấy bài hát tại vị trí:", vitribai);
+        return;
+    }
+    nameArtist.textContent = song.artist;
+    nameSong.textContent = song.name; // ✅ sửa từ title → name
+    music.src = song.fileSong;
+    imgSong.src = song.image;
+
 
 }
+
 function xulyHetbai() {
-    if(isRepeat) {
+    if (isRepeat) {
         isPlaying = true;
         playPause();
     }
@@ -138,7 +171,7 @@ function onOffRepeat() {
     }
     else {
         isRepeat = true;
-        
+
         repeatBtn.classList.add("active");
     }
     console.log(isRepeat);
@@ -157,15 +190,15 @@ function onOffRandom() {
     console.log(isRandom);
 }
 function tatTieng() {
-    if(isMute) {
-        
+    if (isMute) {
+
         volumeBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
         music.volume = 1;
         rangeVolume.value = 100;
         isMute = false;
     }
     else {
-        
+
         volumeBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
         music.volume = 0;
         rangeVolume.value = 0;
@@ -173,3 +206,4 @@ function tatTieng() {
     }
     console.log(isMute);
 }
+console.log(songs);

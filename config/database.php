@@ -3,7 +3,7 @@ class database{
     const HOST = 'localhost';
     const USERNAME = 'root';
     const PASSWORD = '';
-    const DB_NAME = 'webmusic';
+    const DB_NAME = 'webnhac';
     
 
 

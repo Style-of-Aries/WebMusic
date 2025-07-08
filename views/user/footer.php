@@ -5,7 +5,7 @@
         </div>
         <div class="textInfor">
             <div id="nameSong" class="nameSong">Tên bài hát</div>
-            <div class="nameArtist">Tên tác giả</div>
+            <div id="nameArtist" class="nameArtist">Tên tác giả</div>
         </div>
     </div>
     <div class="player-controls">

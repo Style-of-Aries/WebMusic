@@ -10,7 +10,7 @@ class userModel extends database
         $this->connect = $this->connect();
     }
     public function getSongs() {
-        $sql="Select * from albums";
+        $sql="Select * from songs";
         $query=$this->_query($sql);
         $data=[];
         while($row=mysqli_fetch_assoc($query)){
