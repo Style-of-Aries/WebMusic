@@ -1,0 +1,175 @@
+const songs = [
+    {
+        id: 1,
+        title: "Em chỉ là",
+        file: "ecl.mp3",
+        image: "ecl.jpg",
+    },
+    {
+        id: 2,
+        title: "Gã săn cá",
+        file: "gsc.mp3",
+        image: "gsc.jpg",
+    },
+    {
+        id: 3,
+        title: "Không đau nữa rồi",
+        file: "kdnr.mp3",
+        image: "kdnr.jpg",
+    },
+    {
+        id: 4,
+        title: "Phép màu",
+        file: "pm.mp3",
+        image: "pm.jpg",
+    },
+    {
+        id: 5,
+        title: "Nhắn nhủ",
+        file: "nn.mp3",
+        image: "nn.jpg",
+    },
+];
+const nextBtn = document.getElementById("nextBtn");
+const prevBtn = document.getElementById("prevBtn");
+const music = document.getElementById("music");
+const playBtn = document.getElementById("playBtn");
+const rangeAudio = document.getElementById("rangeAudio");
+const timeSong = document.getElementById("timeSong");
+const timeChay = document.getElementById("timeChay");
+const nameSong = document.getElementById("nameSong");
+const imgSong = document.getElementById("imgSong");
+const repeatBtn = document.getElementById("repeatBtn");
+const randomBtn = document.getElementById("randomBtn");
+const rangeVolume = document.getElementById('rangeVolume');
+const volumeBtn = document.getElementById("volumeBtn");
+let isMute = false;
+let isPlaying = true;
+let vitribai = 0;
+let isRepeat = false;
+let isRandom = false;
+let time = setInterval(displayTime, 500);
+playBtn.addEventListener("click", playPause);
+nextBtn.addEventListener("click", function () {
+    doibai(1);
+});
+prevBtn.addEventListener("click", function () {
+    doibai(-1);
+});
+music.addEventListener("ended", xulyHetbai);
+rangeAudio.addEventListener("change", xulyrangeAudio);
+repeatBtn.addEventListener("click", onOffRepeat);
+randomBtn.addEventListener("click", onOffRandom);
+rangeVolume.addEventListener('input', function () {
+  music.volume = this.value / 100;
+});
+volumeBtn.addEventListener("click", tatTieng);
+function playPause() {
+    if (isPlaying) {
+        music.play();
+        isPlaying = false;
+        playBtn.innerHTML = `<i class="fa-solid fa-circle-pause center-button"></i>`;
+        clearInterval(time);
+        time = setInterval(displayTime, 500);
+    } else {
+        isPlaying = true;
+        music.pause();
+        playBtn.innerHTML = `<i class="fa-solid fa-circle-play center-button"></i>`;
+    }
+    console.log(isPlaying);
+}
+function doibai(dir) {
+    if (dir == 1) {
+        vitribai++;
+        if (vitribai >= songs.length) {
+            vitribai = 0;
+        }
+        isPlaying = true;
+    } else if (dir == -1) {
+        vitribai--;
+        if (vitribai < 0) {
+            vitribai = songs.length - 1;
+        }
+        isPlaying = true;
+    }
+    khoitaoSong(vitribai);
+    playPause();
+    console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
+}
+function displayTime() {
+    const { duration, currentTime } = music;
+    rangeAudio.max = duration;
+    rangeAudio.value = currentTime;
+    timeChay.textContent = formatTime(currentTime);
+    if (!duration) {
+        timeSong.textContent = "00:00";
+    } else {
+        timeSong.textContent = formatTime(duration);
+    }
+}
+function formatTime(time) {
+    const phut = Math.floor(time / 60);
+    const giay = Math.floor(time - phut * 60);
+    return `${phut < 10 ? "0" + phut : phut}:${giay < 10 ? "0" + giay : giay}`;
+}
+function khoitaoSong(vitribai) {
+    nameSong.textContent = songs[vitribai].title;
+    music.setAttribute("src", `/WebMusic/public/uploads/music/${songs[vitribai].file}`);
+    imgSong.setAttribute("src", `/WebMusic/public/uploads/img/${songs[vitribai].image}`);
+
+}
+function xulyHetbai() {
+    if(isRepeat) {
+        isPlaying = true;
+        playPause();
+    }
+    else doibai(1);
+}
+function xulyrangeAudio() {
+    music.currentTime = rangeAudio.value;
+}
+// displayTime();
+// khoitaoSong(vitribai);
+function onOffRepeat() {
+    if (isRepeat) {
+        isRepeat = false;
+
+        repeatBtn.classList.remove("active");
+    }
+    else {
+        isRepeat = true;
+        
+        repeatBtn.classList.add("active");
+    }
+    console.log(isRepeat);
+}
+function onOffRandom() {
+    if (isRandom) {
+        isRandom = false;
+
+        randomBtn.classList.remove("active");
+    }
+    else {
+        isRandom = true;
+
+        randomBtn.classList.add("active");
+    }
+    console.log(isRandom);
+}
+function tatTieng() {
+    if(isMute) {
+        
+        volumeBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
+        music.volume = 1;
+        rangeVolume.value = 100;
+        isMute = false;
+    }
+    else {
+        
+        volumeBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+        music.volume = 0;
+        rangeVolume.value = 0;
+        isMute = true;
+    }
+    console.log(isMute);
+}
