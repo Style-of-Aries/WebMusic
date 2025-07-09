@@ -2,12 +2,45 @@ let songs = [];
 
 fetch("../api/getSongs.php") // đường dẫn phù hợp với vị trí file JS của bạn
     .then(res => res.json())
+    // .then(data => {
+    //     songs = data;
+    //     console.log("Danh sách bài hát:", songs);
+    //     vitribai = 0; 
+    //     khoitaoSong(vitribai); 
+    // })
     .then(data => {
         songs = data;
         console.log("Danh sách bài hát:", songs);
-        vitribai = 0; // đảm bảo gán trước
-        khoitaoSong(vitribai); // ✅ truyền đúng tham số
+        // vitribai = null;
+        // khoitaoSong(vitribai);
+        
+        document.querySelectorAll(".song-table tbody tr").forEach(row => {
+            row.addEventListener("click", function () {
+                const index = parseInt(this.getAttribute("data-index"));
+                console.log("Vị trí bài hát:", index);
+                console.log("File bài hát:", songs[index].fileSong);
+                if (isNaN(index)) return;
+
+                if (vitribai === index) {
+                    playPause();
+                    const icon = this.querySelector(".icon-overlay i");
+                    if (icon) icon.className = isPlaying ? "fa-solid fa-play" : "fa-solid fa-pause";
+                } else {
+                    vitribai = index;
+                    isPlaying = true;
+                    khoitaoSong(vitribai);
+                    playPause();
+                    document.querySelectorAll(".song-table tbody tr").forEach(r => r.classList.remove("active"));
+                    this.classList.add("active");
+                    document.querySelectorAll(".icon-overlay i").forEach(icon => icon.className = "fa-solid fa-play");
+                    const icon = this.querySelector(".icon-overlay i");
+                    if (icon) icon.className = "fa-solid fa-pause";
+                }
+            });
+        });
+
     })
+
 
     .catch(error => console.error("Lỗi khi lấy danh sách bài hát:", error));
 
@@ -59,7 +92,7 @@ const rangeVolume = document.getElementById('rangeVolume');
 const volumeBtn = document.getElementById("volumeBtn");
 let isMute = false;
 let isPlaying = true;
-let vitribai = 0;
+let vitribai = null;
 let isRepeat = false;
 let isRandom = false;
 let time = setInterval(displayTime, 500);
@@ -90,7 +123,7 @@ function playPause() {
         music.pause();
         playBtn.innerHTML = `<i class="fa-solid fa-circle-play center-button"></i>`;
     }
-    console.log(isPlaying);
+    console.log("isPlaying =" + isPlaying);
 }
 function doibai(dir) {
     if (dir == 1) {
@@ -138,17 +171,14 @@ function formatTime(time) {
 // }
 function khoitaoSong(vitribai) {
     const song = songs[vitribai];
-
     if (!song) {
         console.error("Không tìm thấy bài hát tại vị trí:", vitribai);
         return;
     }
     nameArtist.textContent = song.artist;
-    nameSong.textContent = song.name; // ✅ sửa từ title → name
+    nameSong.textContent = song.name; 
     music.src = song.fileSong;
     imgSong.src = song.image;
-
-
 }
 
 function xulyHetbai() {
@@ -161,8 +191,6 @@ function xulyHetbai() {
 function xulyrangeAudio() {
     music.currentTime = rangeAudio.value;
 }
-// displayTime();
-// khoitaoSong(vitribai);
 function onOffRepeat() {
     if (isRepeat) {
         isRepeat = false;
@@ -174,7 +202,7 @@ function onOffRepeat() {
 
         repeatBtn.classList.add("active");
     }
-    console.log(isRepeat);
+    console.log("isRepeat = " + isRepeat);
 }
 function onOffRandom() {
     if (isRandom) {
@@ -187,7 +215,7 @@ function onOffRandom() {
 
         randomBtn.classList.add("active");
     }
-    console.log(isRandom);
+    console.log("isRepeat = " + isRandom);
 }
 function tatTieng() {
     if (isMute) {
@@ -204,6 +232,5 @@ function tatTieng() {
         rangeVolume.value = 0;
         isMute = true;
     }
-    console.log(isMute);
+    console.log("isMute = " + isMute);
 }
-console.log(songs);

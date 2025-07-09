@@ -14,11 +14,15 @@ ob_start();
                 </tr>
 
                 <tbody>
-                    <?php $stt = 1; ?>
-                    <?php foreach ($songs as $song): ?>
-                        <tr>
-                            <td><?= $stt++ ?></td> <!-- số thứ tự tăng dần -->
-                            <td><img src="<?= $song['image'] ?>" ></td>
+                    <?php foreach ($songs as $index => $song): ?>
+                        <tr data-index="<?= $index ?>">
+                            <td><?= $index + 1 ?></td> <!-- số thứ tự tăng dần -->
+                            <td>
+                                <div class="song-img-container">
+                                    <img src="<?= $song['image'] ?>" class="song-img" />
+                                    <div class="icon-overlay"><i class="fa-solid fa-play"></i></div>
+                                </div>
+                            </td>
                             <td><?= htmlspecialchars($song['name']) ?></td>
                             <td><?= htmlspecialchars($song['artist']) ?></td>
                         </tr>

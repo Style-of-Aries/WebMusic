@@ -287,6 +287,7 @@
         <div class="main-content">
             <?php echo  $content ?? '' ?>
         </div>
+        
     </div>
     <!-- <div class="player-bar">
         <div class="player-left">
