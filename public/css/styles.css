@@ -15,6 +15,10 @@ body {
   margin: 0;
   background-color: var(--layout-bg);
 }
+.main {
+    display: flex;
+    height: 100vh; /* toàn bộ chiều cao trình duyệt */
+}
 
 .logoWeb img {
   width: 70px;
@@ -124,6 +128,7 @@ body {
   margin-left: 200px;
   width: calc(100% - 200px);
   transition: margin-left 0.3s, width 0.3s;
+  height: calc(100% - 100px);
 }
 
 .header {
@@ -194,6 +199,19 @@ body {
   width: (100% - 200px);
   transition: width 0.3s;
 }
+.mainContent::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mainContent::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+    background-color: rgba(136, 136, 136, 0.5);
+    border-radius: 10px;
+}
+
 .playlist-container {
     overflow-x: auto;
     width: 100%;
@@ -237,7 +255,11 @@ body {
     text-overflow: ellipsis;
     max-width: 250px;
 }
-
+.song-table td img {
+  height: 50px;
+  width: 80px;
+  object-fit: cover;
+}
 
 .playSongs {
   position: fixed;
@@ -345,6 +367,7 @@ body {
   border-radius: 10px;
   position: relative;
 }
+
 
 .playSong-left {
   display: flex;

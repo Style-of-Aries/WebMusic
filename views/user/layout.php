@@ -16,31 +16,7 @@
         <?php include 'sidebar.php'; ?>
         <div class="container">
             <?php include 'header.php'; ?>
-            <div class="mainContent">
-                <div class="contentHeader">
-                    <h2>Danh sách bài hát</h2>
-                    <div class="playlist-container">
-                        <table class="song-table">
-                            <tr>
-                                <th>ID</th>
-                                <th>Tên bài hát</th>
-                                <th>Tác giả</th>
-                            </tr>
-                            
-                            <tbody>
-                                <?php foreach ($songs as  $song): ?>
-                                    <tr>
-                                        <td><?= $song['id']   ?></td>
-                                        <td><?= htmlspecialchars($song['name']) ?></td>
-                                        <td><?= htmlspecialchars($song['artist']) ?></td>
-            
-                                    </tr>
-                                <?php endforeach ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+             <?= $mainContent ?> 
         </div>
         <?php include 'footer.php'; ?>
     </div>

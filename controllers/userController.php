@@ -7,6 +7,6 @@ class UserController {
     }
     public function index() {
         $songs = $this->userModel->getSongs();
-        require_once './../views/user/layout.php';
+        require_once './../views/user/list.php';
     }
 }
