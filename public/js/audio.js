@@ -90,6 +90,7 @@ const repeatBtn = document.getElementById("repeatBtn");
 const randomBtn = document.getElementById("randomBtn");
 const rangeVolume = document.getElementById('rangeVolume');
 const volumeBtn = document.getElementById("volumeBtn");
+
 let isMute = false;
 let isPlaying = true;
 let vitribai = null;
@@ -192,6 +193,17 @@ function xulyHetbai() {
         isPlaying = true;
         playPause();
     }
+    else if(isRandom) {
+        let vitrimoi;
+        do {
+            vitrimoi = Math.floor(Math.random() * songs.length);
+            console.log("vị trí mới: = " +vitrimoi);
+        } while(vitribai === vitrimoi)
+            isPlaying = true;
+            vitribai = vitrimoi;
+            khoitaoSong(vitribai);
+            playPause();
+    }
     else doibai(1);
 }
 function xulyrangeAudio() {
@@ -221,7 +233,7 @@ function onOffRandom() {
 
         randomBtn.classList.add("active");
     }
-    console.log("isRepeat = " + isRandom);
+    console.log("isRandom = " + isRandom);
 }
 function tatTieng() {
     if (isMute) {
