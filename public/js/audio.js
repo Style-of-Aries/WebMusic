@@ -107,10 +107,16 @@ music.addEventListener("ended", xulyHetbai);
 rangeAudio.addEventListener("change", xulyrangeAudio);
 repeatBtn.addEventListener("click", onOffRepeat);
 randomBtn.addEventListener("click", onOffRandom);
-rangeVolume.addEventListener('input', function () {
-    music.volume = this.value / 100;
-});
+// rangeVolume.addEventListener('input', function () {
+//     music.volume = this.value / 100;
+// });
 volumeBtn.addEventListener("click", tatTieng);
+rangeVolume.addEventListener("input", function () {
+    const value = parseInt(this.value);
+    music.volume = value / 100;
+
+    this.style.background = `linear-gradient(to right, white ${value}%, rgba(255,255,255,0.2) ${value}%)`;
+});
 function playPause() {
     if (isPlaying) {
         music.play();
@@ -234,3 +240,4 @@ function tatTieng() {
     }
     console.log("isMute = " + isMute);
 }
+

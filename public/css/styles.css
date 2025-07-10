@@ -328,11 +328,11 @@ body {
 }
 
 .inforSong .imageSong img {
-  width: 100px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   object-fit: cover;
-  margin: 0 10px;
-  border-radius: 10px;
+  margin: 0 10px 0px 20px;
+  border-radius: 15px;
 }
 
 .inforSong .textInfor {
@@ -393,11 +393,11 @@ body {
   /* hoặc màu bạn muốn khi bật */
 }
 
-.time-line {
+/* .time-line {
   display: flex;
   align-items: center;
   width: 70%;
-}
+} */
 
 .time-line span {
   font-size: 14px;
@@ -412,6 +412,20 @@ body {
   margin: 0 10px;
   border-radius: 10px;
   position: relative;
+}
+.time-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    color: white;
+    font-size: 12px;
+}
+
+input[type="range"] {
+    flex-grow: 1;
+    accent-color: #fff;
+    height: 5px;
 }
 
 
@@ -437,6 +451,3 @@ body {
   color: #ff8efb;
 }
 
-.volume #rangeVolume {
-  height: 5px;
-}
