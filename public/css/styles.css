@@ -15,13 +15,38 @@ body {
   margin: 0;
   background-color: var(--layout-bg);
 }
-
+.card {
+  cursor: pointer;
+  transition: 0.3s;
+}
 .main {
   display: flex;
   height: 100vh;
   /* toàn bộ chiều cao trình duyệt */
 }
+.mainContent {
+  margin-top: 60px;
+  overflow-y: auto;
 
+  padding: 10px;
+  color: white;
+  width: (100% - 200px);
+  transition: width 0.3s;
+}
+
+.mainContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mainContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+  background-color: rgba(136, 136, 136, 0.5);
+  border-radius: 10px;
+}
+/*========================== sidebar =========================*/
 .logoWeb img {
   width: 70px;
   height: auto;
@@ -132,7 +157,7 @@ body {
   transition: margin-left 0.3s, width 0.3s;
   height: calc(100% - 100px);
 }
-
+/*========================== header =========================*/
 .header {
   height: 60px;
   color: white;
@@ -193,120 +218,91 @@ body {
   height: auto;
   border-radius: 50%;
 }
+/*========================== list =========================*/
 
-.mainContent {
-  margin-top: 60px;
-  overflow-y: auto;
-
-  padding: 10px;
-  color: white;
-  width: (100% - 200px);
-  transition: width 0.3s;
-}
-
-.mainContent::-webkit-scrollbar {
-  width: 6px;
-}
-
-.mainContent::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.mainContent::-webkit-scrollbar-thumb {
-  background-color: rgba(136, 136, 136, 0.5);
-  border-radius: 10px;
-}
 
 .playlist-container {
   overflow-x: auto;
   width: 100%;
   margin-top: 16px;
+  display: flex;
+  gap: 25px;
 }
-
+.playlist-container::-webkit-scrollbar {
+  height: 6px;
+  display: none;
+}
+.playlist-container::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 5px;
+}
 /* Bảng hiện đại */
-.song-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #1e1e2f;
-  color: #f0f0f0;
-  border-radius: 10px;
+
+.list-item {
+  position: relative;
+  width: 200px;
+  background-color: #111;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+  color: white;
+  font-family: sans-serif;
+  flex: 0 0 auto;
 }
 
-.song-table th,
-.song-table td {
-  padding: 12px 16px;
-  text-align: left;
+.list-item:hover {
+  transform: scale(1.03);
+}
+
+.list-item img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+.thumbnail {
+  width: 100%;
+  display: block;
   border-bottom: 1px solid #333;
 }
 
-.song-table th {
-  background-color: #2b2b40;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.song-table tbody tr:hover {
-  background-color: #383856;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.song-table td {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 250px;
-}
-
-/* .song-table td img {
-  height: 50px;
-  width: 80px;
-  object-fit: cover;
-} */
-
-.song-img-container {
-  position: relative;
+.play-btn {
+  position: absolute;
+  bottom: 80px;
+  right: 15px;
+  background-color: var(--primary-bg);
   width: 50px;
   height: 50px;
-}
-
-.song-img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.icon-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: white;
-  font-size: 20px;
-  opacity: 0;
-  transition: 0.3s;
-  pointer-events: none;
+  font-size: 22px;
+  transition: transform 0.3s;
 }
 
-.song-img-container:hover .icon-overlay {
-  opacity: 0.8;
-  color: #ff8efb;
+.card:hover .play-btn {
+  transform: scale(1.1);
 }
 
-.song-table tr.active .icon-overlay {
-  opacity: 1;
-  color: #fff;
-  /* màu xanh như Spotify */
-}
-.song-table tr.active .icon-overlay:hover {
-  color: #ff8efb;
+.info {
+  padding: 10px;
 }
 
+.info h3 {
+  margin: 0;
+  font-size: 16px;
+}
 
+.info p {
+  margin: 5px 0 0 0;
+  font-size: 14px;
+  color: #aaa;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/*========================== footer =========================*/
 .playSongs {
   position: fixed;
   bottom: 0;
@@ -451,3 +447,77 @@ input[type="range"] {
   color: #ff8efb;
 }
 
+/*========================== BXH =========================*/
+.bxh-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #1e1e1e;
+  border-radius: 8px;
+}
+
+.bxh-item:hover {
+  background: #292929;
+}
+
+
+.bxh-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: transparent; /* Không tô màu chữ */
+  -webkit-text-stroke: 1.5px #fff; /* Viền xanh lam */
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+
+
+.bxh-thumb-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.bxh-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.bxh-thumb-wrapper .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 50%;
+  display: none;
+  pointer-events: none;
+}
+
+.bxh-thumb-wrapper:hover .play-icon {
+  display: block;
+}
+
+.bxh-title {
+  font-weight: 600;
+  color: white;
+  width: 30%;
+}
+
+.bxh-artist {
+  color: #ccc;
+  font-size: 14px;
+  width: 40%;
+}
+#bxh-timeSong{
+  color: #827f7f;
+  font-size: 12px;
+}

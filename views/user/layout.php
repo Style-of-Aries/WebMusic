@@ -16,10 +16,15 @@
         <?php include 'sidebar.php'; ?>
         <div class="container">
             <?php include 'header.php'; ?>
-             <?= $mainContent ?> 
+            <div class="mainContent">
+                <div class="contentHeader">
+                    <?= $mainContent ?>
+                </div>
+            </div>
         </div>
         <?php include 'footer.php'; ?>
     </div>
 </body>
 <script src="<?= BASE_URL ?>js/audio.js"></script>
+
 </html>
