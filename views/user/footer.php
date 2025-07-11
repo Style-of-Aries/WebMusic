@@ -1,11 +1,11 @@
 <div class="playSongs">
     <div class="inforSong">
         <div class="imageSong">
-            <img id="imgSong" src="" alt="">
+            <img id="imgSong" src="" alt="" onerror="this.style.display='none';">
         </div>
         <div class="textInfor">
-            <div id="nameSong" class="nameSong">Tên bài hát</div>
-            <div id="nameArtist" class="nameArtist">Tên tác giả</div>
+            <div id="nameSong" class="nameSong"></div>
+            <div id="nameArtist" class="nameArtist"></div>
         </div>
     </div>
     <div class="player-controls">

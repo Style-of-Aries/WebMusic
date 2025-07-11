@@ -178,6 +178,7 @@ function formatTime(time) {
 // }
 function khoitaoSong(vitribai) {
     const song = songs[vitribai];
+    const src = songs[vitribai].image;
     if (!song) {
         console.error("Không tìm thấy bài hát tại vị trí:", vitribai);
         return;
@@ -185,7 +186,11 @@ function khoitaoSong(vitribai) {
     nameArtist.textContent = song.artist;
     nameSong.textContent = song.name; 
     music.src = song.fileSong;
-    imgSong.src = song.image;
+    // imgSong.src = song.image;
+    if (src) {
+        imgSong.src = src;
+        imgSong.style.display = "block";
+    }
 }
 
 function xulyHetbai() {
