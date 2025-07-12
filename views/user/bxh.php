@@ -2,6 +2,7 @@
 ob_start();
 ?>
 <h2>BXH Nhạc Mới</h2>
+<?php shuffle($songs); ?>
 <?php foreach ($songs as $index => $song): ?>
   <div class="card bxh-item" data-index="<?=$index;?>"
                               data-name="<?=$song['name'];?>"
