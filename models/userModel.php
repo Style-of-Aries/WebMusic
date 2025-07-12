@@ -19,6 +19,16 @@ class userModel extends database
         return $data;
         
     }
+    public function getSongsDomic() {
+        $sql="Select * from songs where artist='Dương Domic'";
+        $query=$this->_query($sql);
+        $data=[];
+        while($row=mysqli_fetch_assoc($query)){
+            array_push($data,$row);
+        }
+        return $data;
+        
+    }
     public function _query($sql){
         return mysqli_query($this->connect,$sql);
     }

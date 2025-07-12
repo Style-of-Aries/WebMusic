@@ -6,7 +6,11 @@ ob_start();
         <div class="playlist-container">
             
             <?php foreach ($songs as  $index => $song): ?>
-                <div class="card list-item" data-index="<?=$index;?>">
+                <div class="card list-item" data-index="<?=$index;?>"
+                                            data-name="<?=$song['name'];?>"
+                                            data-img="<?=$song['image'];?>"
+                                            data-artist="<?=$song['artist'];?>"
+                                            data-song="<?=$song['fileSong'];?>">
                     <img src="<?= $song['image'] ?>" alt="" class="thumbnail">
                     <div class="play-btn">
                         <i class="fa-solid fa-play play-icon"></i>

@@ -3,7 +3,11 @@ ob_start();
 ?>
 <h2>BXH Nhạc Mới</h2>
 <?php foreach ($songs as $index => $song): ?>
-  <div class="card bxh-item" data-index="<?=$index;?>">
+  <div class="card bxh-item" data-index="<?=$index;?>"
+                              data-name="<?=$song['name'];?>"
+                              data-img="<?=$song['image'];?>"
+                              data-artist="<?=$song['artist'];?>"
+                              data-song="<?=$song['fileSong'];?>">
     <div class="bxh-number"><?= $index + 1 ?></div>
 
     <div class="bxh-thumb-wrapper">

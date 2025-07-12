@@ -10,7 +10,7 @@ class UserController {
         require_once './../views/user/list.php';
     }
     public function bxh() {
-        $songs = $this->userModel->getSongs();
+        $songs = $this->userModel->getSongsDomic();
         require_once './../views/user/bxh.php';
     }
 }

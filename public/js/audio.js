@@ -1,86 +1,47 @@
 let songs = [];
+// fetch("../api/getSongs.php")
+//   .then((res) => res.json())
+//   .then((data) => {
+//     songs = data;
+//     console.log("Danh sách bài hát:", songs);
+//     vitribai = null;
+//     khoitaoSong(vitribai);
 
-fetch("../api/getSongs.php") // đường dẫn phù hợp với vị trí file JS của bạn
-  .then((res) => res.json())
-  // .then(data => {
-  //     songs = data;
-  //     console.log("Danh sách bài hát:", songs);
-  //     vitribai = 0;
-  //     khoitaoSong(vitribai);
-  // })
-  .then((data) => {
-    songs = data;
-    console.log("Danh sách bài hát:", songs);
-    // vitribai = null;
-    // khoitaoSong(vitribai);
+//     document.querySelectorAll(".song-table tbody tr").forEach((row) => {
+//       row.addEventListener("click", function () {
+//         const index = parseInt(this.getAttribute("data-index"));
+//         console.log("Vị trí bài hát:", index);
+//         console.log("File bài hát:", songs[index].fileSong);
+//         if (isNaN(index)) return;
 
-    // document.querySelectorAll(".song-table tbody tr").forEach((row) => {
-    //   row.addEventListener("click", function () {
-    //     const index = parseInt(this.getAttribute("data-index"));
-    //     console.log("Vị trí bài hát:", index);
-    //     console.log("File bài hát:", songs[index].fileSong);
-    //     if (isNaN(index)) return;
+//         if (vitribai === index) {
+//           playPause();
+//           const icon = this.querySelector(".icon-overlay i");
+//           if (icon)
+//             icon.className = isPlaying
+//               ? "fa-solid fa-play"
+//               : "fa-solid fa-pause";
+//         } else {
+//           vitribai = index;
+//           isPlaying = true;
+//           khoitaoSong(vitribai);
+//           playPause();
+//           document
+//             .querySelectorAll(".song-table tbody tr")
+//             .forEach((r) => r.classList.remove("active"));
+//           this.classList.add("active");
+//           document
+//             .querySelectorAll(".icon-overlay i")
+//             .forEach((icon) => (icon.className = "fa-solid fa-play"));
+//           const icon = this.querySelector(".icon-overlay i");
+//           if (icon) icon.className = "fa-solid fa-pause";
+//         }
+//       });
+//     });
+//   })
 
-    //     if (vitribai === index) {
-    //       playPause();
-    //       const icon = this.querySelector(".icon-overlay i");
-    //       if (icon)
-    //         icon.className = isPlaying
-    //           ? "fa-solid fa-play"
-    //           : "fa-solid fa-pause";
-    //     } else {
-    //       vitribai = index;
-    //       isPlaying = true;
-    //       khoitaoSong(vitribai);
-    //       playPause();
-    //       document
-    //         .querySelectorAll(".song-table tbody tr")
-    //         .forEach((r) => r.classList.remove("active"));
-    //       this.classList.add("active");
-    //       document
-    //         .querySelectorAll(".icon-overlay i")
-    //         .forEach((icon) => (icon.className = "fa-solid fa-play"));
-    //       const icon = this.querySelector(".icon-overlay i");
-    //       if (icon) icon.className = "fa-solid fa-pause";
-    //     }
-    //   });
-    // });
-  })
+//   .catch((error) => console.error("Lỗi khi lấy danh sách bài hát:", error));
 
-  .catch((error) => console.error("Lỗi khi lấy danh sách bài hát:", error));
-
-// const songs = [
-//     {
-//         id: 1,
-//         title: "Em chỉ là",
-//         file: "ecl.mp3",
-//         image: "ecl.jpg",
-//     },
-//     {
-//         id: 2,
-//         title: "Gã săn cá",
-//         file: "gsc.mp3",
-//         image: "gsc.jpg",
-//     },
-//     {
-//         id: 3,
-//         title: "Không đau nữa rồi",
-//         file: "kdnr.mp3",
-//         image: "kdnr.jpg",
-//     },
-//     {
-//         id: 4,
-//         title: "Phép màu",
-//         file: "pm.mp3",
-//         image: "pm.jpg",
-//     },
-//     {
-//         id: 5,
-//         title: "Nhắn nhủ",
-//         file: "nn.mp3",
-//         image: "nn.jpg",
-//     },
-// ];
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const music = document.getElementById("music");
@@ -125,33 +86,44 @@ rangeVolume.addEventListener("input", function () {
 });
 document.querySelectorAll(".card").forEach((card) => {
   card.addEventListener("click", function () {
-    const index = parseInt(this.getAttribute("data-index")); // ép kiểu
-    console.log("Vị trí bài hát:", index);
-    console.log("File bài hát:", songs[index].fileSong);
 
+    const index = parseInt(this.getAttribute("data-index")); // ép kiểu
+    const audio = this.getAttribute("data-song");
+    console.log("Vị trí bài hát:", index);
+    console.log("File bài hát:", audio);
 
     if (vitribai === index) {
       playPause();
       const icon = this.querySelector(".play-icon");
-          if (icon)
-            icon.className = isPlaying
-              ? "fa-solid fa-play play-icon"
-              : "fa-solid fa-pause play-icon";
-        
+      if (icon)
+        icon.className = isPlaying
+          ? "fa-solid fa-play play-icon"
+          : "fa-solid fa-pause play-icon";
     } else {
       vitribai = index;
       isPlaying = true;
       khoitaoSong(vitribai);
       playPause();
       document
-            .querySelectorAll(".play-icon")
-            .forEach((icon) => (icon.className = "fa-solid fa-play play-icon"));
-          const icon = this.querySelector(".play-icon");
-          if (icon) icon.className = "fa-solid fa-pause play-icon";
+        .querySelectorAll(".play-icon")
+        .forEach((icon) => (icon.className = "fa-solid fa-play play-icon"));
+      const icon = this.querySelector(".play-icon");
+      if (icon) icon.className = "fa-solid fa-pause play-icon";
     }
-  })
+  });
 });
 
+document.querySelectorAll(".card").forEach((card, index) => {
+  const song = {
+    name: card.dataset.name,
+    image: card.dataset.img,
+    artist: card.dataset.artist,
+    fileSong: card.dataset.song,
+  };
+  songs.push(song);
+  // Gán index để đảm bảo đúng vị trí
+  card.setAttribute("data-index", index);
+});
 function playPause() {
   if (isPlaying) {
     music.play();
@@ -168,18 +140,35 @@ function playPause() {
 }
 function doibai(dir) {
   if (dir == 1) {
-    vitribai++;
-    if (vitribai >= songs.length) {
-      vitribai = 0;
+    if (isRandom) {
+      let vitrimoi;
+      do {
+        vitrimoi = Math.floor(Math.random() * songs.length);
+        console.log("vị trí mới: = " + vitrimoi);
+      } while (vitribai === vitrimoi);
+      vitribai = vitrimoi;
+    } else {
+      vitribai++;
+      if (vitribai >= songs.length) {
+        vitribai = 0;
+      }
     }
-    isPlaying = true;
   } else if (dir == -1) {
-    vitribai--;
-    if (vitribai < 0) {
-      vitribai = songs.length - 1;
+    if (isRandom) {
+      let vitrimoi;
+      do {
+        vitrimoi = Math.floor(Math.random() * songs.length);
+        console.log("vị trí mới: = " + vitrimoi);
+      } while (vitribai === vitrimoi);
+      vitribai = vitrimoi;
+    } else {
+      vitribai--;
+      if (vitribai < 0) {
+        vitribai = songs.length - 1;
+      }
     }
-    isPlaying = true;
   }
+  isPlaying = true;
   khoitaoSong(vitribai);
   playPause();
   // console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
