@@ -19,7 +19,7 @@
       <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
     </div> -->
     <form action="index.php?action=auth_login" method="post">
-      <h2>Login</h2>
+      <h2>Đăng nhập</h2>
 
       <div class="input-box">
         <input type="text" name="email" placeholder="Email" required>
@@ -27,21 +27,21 @@
       </div>
 
       <div class="input-box">
-        <input type="password" name="password" placeholder="Password" required>
+        <input type="password" name="password" placeholder="Mật khẩu" required>
         <i class="fa-solid fa-lock"></i>
       </div>
 
       <span class="error"><?php echo $errorLogin ?></span>
 
       <div class="remember-forgot">
-        <label><input type="checkbox" name="remember"> Remember me</label>
-        <a href="#">Forgot password?</a>
+        <label><input type="checkbox" name="remember"> Nhớ mật khẩu</label>
+        <a href="#">Quên mật khẩu?</a>
       </div>
 
       <button type="submit" name="btn_login" class="btn">Đăng nhập</button>
 
       <div class="register-link">
-        <p>Don't have an account? <a href="index.php?action=register">Register</a></p>
+        <p>Bạn chưa có tài khoản? <a href="index.php?action=register">Đăng ký</a></p>
       </div>
     </form>
 
