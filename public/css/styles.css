@@ -22,6 +22,9 @@ body {
 .main {
   display: flex;
   height: 100vh;
+  background: url(../img/068fba01b5a5d8181a6dcee0847cada4.jpg) no-repeat;
+  background-position: center;
+  background-size: cover;
   /* toàn bộ chiều cao trình duyệt */
 }
 .mainContent {
@@ -63,7 +66,6 @@ body {
   font-size: 24px;
   padding: 10px;
   cursor: pointer;
-  background-color: var(--sidebar-popup-bg);
   color: white;
 }
 
@@ -112,7 +114,8 @@ body {
 
 .sidebar {
   width: 200px;
-  background-color: var(--sidebar-popup-bg);
+  
+  backdrop-filter: blur(20px);
   position: fixed;
   left: 0;
   top: 0;
@@ -169,7 +172,8 @@ body {
   top: 0;
   width: calc(100% - 200px);
   transition: width 0.3s;
-  background-color: var(--layout-bg);
+  
+  backdrop-filter: blur(20px);
 
 }
 
@@ -189,7 +193,8 @@ body {
   padding: 10px;
   border: none;
   border-radius: 999px;
-  background: var(--queue-player-popup-bg);
+  border: 2px solid rgba(255, 255, 255, .2);
+  background: transparent;
   color: #fff;
   outline: none;
 }
@@ -241,7 +246,8 @@ body {
 .list-item {
   position: relative;
   width: 200px;
-  background-color: #111;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
   border-radius: 8px;
   overflow: hidden;
   color: white;
@@ -268,14 +274,14 @@ body {
   position: absolute;
   bottom: 80px;
   right: 15px;
-  background-color: var(--primary-bg);
+  background-color: white;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
   font-size: 22px;
   transition: transform 0.3s;
 }
@@ -309,7 +315,7 @@ body {
   width: 100%;
   height: 100px;
   /* hoặc chiều cao bạn muốn */
-  background: var(--queue-player-popup-bg);
+  backdrop-filter: blur(20px);
   color: white;
   display: flex;
   align-items: center;
@@ -454,8 +460,8 @@ input[type="range"] {
   gap: 15px;
   padding: 10px;
   margin-bottom: 8px;
-  background: #1e1e1e;
-  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, .2);
+  backdrop-filter: blur(20px);
 }
 
 .bxh-item:hover {
