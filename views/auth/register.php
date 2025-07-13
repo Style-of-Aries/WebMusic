@@ -8,7 +8,7 @@
         <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
     </div> -->
     <form action="index.php?action=auth_register" method="post">
-        <h2>Đăng ký tài khoản</h2>
+        <h2>Đăng ký</h2>
 
         <div class="input-box">
             <input type="text" name="username" placeholder="Tên đăng nhập" value="<?php echo $vlName; ?>" required>

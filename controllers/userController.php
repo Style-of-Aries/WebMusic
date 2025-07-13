@@ -1,17 +1,36 @@
 <?php
 require_once '../models/userModel.php';
-class UserController {
+require_once '../config/config.php';
+class UserController
+{
     private $userModel;
-    public function __construct() {
+    public function __construct()
+    {
         $this->userModel = new UserModel();
     }
-    public function index() {
+    public function index()
+    {
         $songs = $this->userModel->getSongs();
         $songsDomic = $this->userModel->getSongsDomic();
         require_once './../views/user/list.php';
     }
-    public function bxh() {
+    public function bxh()
+    {
         $songs = $this->userModel->getSongs();
         require_once './../views/user/bxh.php';
     }
+    public function search()
+{
+    $keyword = $_GET['keyword'] ?? '';
+
+    // Nếu có từ khóa tìm kiếm, gọi hàm tìm kiếm
+    if ($keyword !== '') {
+        $songs = $this->userModel->searchSongs($keyword);
+    } else $songs = null;
+    ob_start();
+    include BASE_PATH . '/views/user/searchResult.php';
+    $mainContent = ob_get_clean();
+    include BASE_PATH . '/views/user/layout.php';
+}
+
 }
