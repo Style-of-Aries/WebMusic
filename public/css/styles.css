@@ -14,6 +14,7 @@ body {
   height: 100vh;
   margin: 0;
   background-color: var(--layout-bg);
+   width: 1500px;
 }
 .card {
   cursor: pointer;
@@ -25,6 +26,7 @@ body {
   background: url(../img/068fba01b5a5d8181a6dcee0847cada4.jpg) no-repeat;
   background-position: center;
   background-size: cover;
+ 
   /* toàn bộ chiều cao trình duyệt */
 }
 .mainContent {
@@ -73,48 +75,48 @@ body {
   background: #292929;
 }
 
-#toggle-menu:checked~.sidebar .logoWeb img {
+#toggle-menu:checked ~ .sidebar .logoWeb img {
   width: 50px;
   height: auto;
   transition: width 0.3s, opacity 0.3s;
 }
 
-#toggle-menu:checked~.sidebar {
+#toggle-menu:checked ~ .sidebar {
   width: 60px;
 }
 
-#toggle-menu:checked~.sidebar .toggle-btn {
+#toggle-menu:checked ~ .sidebar .toggle-btn {
   text-align: center;
 }
 
-#toggle-menu:checked~.sidebar .sidebar-content .nav-ul .nav-li a svg {
+#toggle-menu:checked ~ .sidebar .sidebar-content .nav-ul .nav-li a svg {
   text-align: center;
 }
 
-#toggle-menu:checked~.sidebar .sidebar-content .nav-ul .nav-li a span {
+#toggle-menu:checked ~ .sidebar .sidebar-content .nav-ul .nav-li a span {
   opacity: 0;
   width: 0;
   transition: opacity 0.3s, width 0.3s;
 }
 
-#toggle-menu:checked~.container {
+#toggle-menu:checked ~ .container {
   margin-left: 60px;
   width: calc(100% - 60px);
   transition: margin-left 0.3s, width 0.3s;
 }
 
-#toggle-menu:checked~.container .avatarUser {
+#toggle-menu:checked ~ .container .avatarUser {
   transition: margin-right 0.3s;
 }
 
-#toggle-menu:checked~.container .header {
+#toggle-menu:checked ~ .container .header {
   width: calc(100% - 60px);
   transition: width 0.3s;
 }
 
 .sidebar {
   width: 200px;
-  
+
   backdrop-filter: blur(20px);
   position: fixed;
   left: 0;
@@ -172,9 +174,8 @@ body {
   top: 0;
   width: calc(100% - 200px);
   transition: width 0.3s;
-  
-  backdrop-filter: blur(20px);
 
+  backdrop-filter: blur(20px);
 }
 
 .header .homeSearch {
@@ -184,7 +185,6 @@ body {
   justify-content: center;
   margin-left: 50px;
   width: 500px;
-
 }
 
 .header .homeSearch input {
@@ -193,7 +193,7 @@ body {
   padding: 10px;
   border: none;
   border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   background: transparent;
   color: #fff;
   outline: none;
@@ -218,16 +218,43 @@ body {
 }
 
 .header .avatarUser {
-  margin-right: 30px;
+  position: relative;
+  display: inline-block;
 }
 
 .header .avatarUser img {
-  width: 50px;
-  height: auto;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  object-fit: cover;
 }
-/*========================== list =========================*/
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 110%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  z-index: 1000;
+}
 
+.dropdownMenu a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdownMenu a:hover {
+  background-color: #f2f2f2;
+}
+
+/*========================== list =========================*/
 
 .playlist-container {
   overflow-x: auto;
@@ -249,7 +276,7 @@ body {
 .list-item {
   position: relative;
   width: 200px;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
   border-radius: 8px;
   overflow: hidden;
@@ -330,6 +357,7 @@ body {
   display: flex;
   align-items: center;
   width: 400px;
+  position: relative;
 }
 
 .inforSong .imageSong img {
@@ -356,7 +384,14 @@ body {
   font-size: 0.7em;
   color: #b2b0b6;
 }
-
+.favoriteBtn {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+  font-size: 1.4em;
+  display: none;
+  cursor: pointer;
+}
 .player-controls {
   display: flex;
   flex-direction: column;
@@ -419,20 +454,19 @@ body {
   position: relative;
 }
 .time-line {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    color: white;
-    font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  color: white;
+  font-size: 12px;
 }
 
 input[type="range"] {
-    flex-grow: 1;
-    accent-color: #fff;
-    height: 5px;
+  flex-grow: 1;
+  accent-color: #fff;
+  height: 5px;
 }
-
 
 .playSong-left {
   display: flex;
@@ -463,14 +497,13 @@ input[type="range"] {
   gap: 15px;
   padding: 10px;
   margin-bottom: 8px;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
 }
 
 .bxh-item:hover {
   background: #292929;
 }
-
 
 .bxh-number {
   font-size: 36px;
@@ -482,7 +515,6 @@ input[type="range"] {
   text-align: center;
   width: 80px;
 }
-
 
 .bxh-thumb-wrapper {
   position: relative;
@@ -526,7 +558,7 @@ input[type="range"] {
   font-size: 14px;
   width: 40%;
 }
-#bxh-timeSong{
+#bxh-timeSong {
   color: #827f7f;
   font-size: 12px;
 }
@@ -537,14 +569,13 @@ input[type="range"] {
   gap: 15px;
   padding: 10px;
   margin-bottom: 8px;
-  border: 2px solid rgba(255, 255, 255, .2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(20px);
 }
 
 .search-item:hover {
   background: #292929;
 }
-
 
 .search-number {
   font-size: 36px;
@@ -556,7 +587,6 @@ input[type="range"] {
   text-align: center;
   width: 80px;
 }
-
 
 .search-thumb-wrapper {
   position: relative;
@@ -600,7 +630,7 @@ input[type="range"] {
   font-size: 14px;
   width: 40%;
 }
-#search-timeSong{
+#search-timeSong {
   color: #827f7f;
   font-size: 12px;
 }

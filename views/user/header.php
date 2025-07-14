@@ -14,9 +14,11 @@
         <input type="text" name="keyword" placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..." required>
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
-    <div class="avatarUser">
-        <a href="index.php?controller=admin&action=index">
-            <img src="<?= BASE_URL ?>img/avatar.jpg" alt="avatar">
-        </a>
+    <div class="avatarUser" id="avatarWrapper">
+        <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="avatar" id="avatarBtn">
+        <div class="dropdownMenu" id="dropdownMenu">
+            <a href="index.php?controller=admin&action=index">👤 Trang quản trị</a>
+            <a href="logout.php">🚪 Đăng xuất</a>
+        </div>
     </div>
 </div>

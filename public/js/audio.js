@@ -57,6 +57,7 @@ const randomBtn = document.getElementById("randomBtn");
 const rangeVolume = document.getElementById("rangeVolume");
 const volumeBtn = document.getElementById("volumeBtn");
 const card_playBtn = document.getElementById("card_playBtn");
+const favoriteBtn = document.getElementById("favoriteBtn");
 let isMute = false;
 let isPlaying = true;
 let vitribai = null;
@@ -64,6 +65,9 @@ let isRepeat = false;
 let isRandom = false;
 let time = setInterval(displayTime, 500);
 playBtn.addEventListener("click", playPause);
+favoriteBtn.addEventListener("click", function() {
+  
+})
 nextBtn.addEventListener("click", function () {
   doibai(1);
 });
@@ -86,10 +90,11 @@ rangeVolume.addEventListener("input", function () {
 });
 document.querySelectorAll(".card").forEach((card) => {
   card.addEventListener("click", function () {
-
-    const index = parseInt(this.getAttribute("data-index")); // ép kiểu
-    const audio = this.getAttribute("data-song");
+    const playlist = this.dataset.playlist;
+    const index = this.dataset.index; // ép kiểu
+    const audio = this.dataset.song;
     console.log("Vị trí bài hát:", index);
+    console.log("Playlist: ", playlist);
     console.log("File bài hát:", audio);
 
     if (vitribai === index) {
@@ -102,7 +107,7 @@ document.querySelectorAll(".card").forEach((card) => {
     } else {
       vitribai = index;
       isPlaying = true;
-      khoitaoSong(vitribai);
+      khoitaoSong(vitribai, playlist);
       playPause();
       document
         .querySelectorAll(".play-icon")
@@ -175,6 +180,11 @@ function doibai(dir) {
 }
 function displayTime() {
   const { duration, currentTime } = music;
+  if (vitribai === null || isNaN(duration)) {
+    timeChay.textContent = "--:--";
+    timeSong.textContent = "--:--";
+    return;
+  }
   rangeAudio.max = duration;
   rangeAudio.value = currentTime;
   timeChay.textContent = formatTime(currentTime);
@@ -210,6 +220,7 @@ function khoitaoSong(vitribai) {
     imgSong.src = src;
     imgSong.style.display = "block";
   }
+  document.getElementById("favoriteBtn").style.display = "block";
   if (songs[vitribai]) {
     console.log("Bài hiện tại:", vitribai, songs[vitribai].fileSong);
   }

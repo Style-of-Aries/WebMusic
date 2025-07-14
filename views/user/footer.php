@@ -7,6 +7,9 @@
             <div id="nameSong" class="nameSong"></div>
             <div id="nameArtist" class="nameArtist"></div>
         </div>
+        <div id="favoriteBtn" class="favoriteBtn">
+            <i class="fa-regular fa-heart"></i>
+        </div>
     </div>
     <div class="player-controls">
         <audio id="music" src=""></audio>
@@ -24,9 +27,9 @@
             </div>
         </div>
         <div class="time-line">
-            <span id="timeChay">00:00</span>
+            <span id="timeChay">--:--</span>
             <input type="range" id="rangeAudio">
-            <span id="timeSong">00:00</span>
+            <span id="timeSong">--:--</span>
         </div>
     </div>
     <div class="playSong-left">
