@@ -58,6 +58,9 @@ const rangeVolume = document.getElementById("rangeVolume");
 const volumeBtn = document.getElementById("volumeBtn");
 const card_playBtn = document.getElementById("card_playBtn");
 const favoriteBtn = document.getElementById("favoriteBtn");
+const avatarBtn = document.getElementById("avatarBtn");
+const dropdownMenu = document.getElementById("dropdownMenu");
+
 let isMute = false;
 let isPlaying = true;
 let vitribai = null;
@@ -65,9 +68,7 @@ let isRepeat = false;
 let isRandom = false;
 let time = setInterval(displayTime, 500);
 playBtn.addEventListener("click", playPause);
-favoriteBtn.addEventListener("click", function() {
-  
-})
+favoriteBtn.addEventListener("click", function () {});
 nextBtn.addEventListener("click", function () {
   doibai(1);
 });
@@ -128,6 +129,17 @@ document.querySelectorAll(".card").forEach((card, index) => {
   songs.push(song);
   // Gán index để đảm bảo đúng vị trí
   card.setAttribute("data-index", index);
+});
+avatarBtn.addEventListener("click", function (e) {
+  e.stopPropagation(); // Ngăn click lan ra ngoài
+  dropdownMenu.style.display =
+    dropdownMenu.style.display === "block" ? "none" : "block";
+});
+
+window.addEventListener("click", function (e) {
+  if (!dropdownMenu.contains(e.target)) {
+    dropdownMenu.style.display = "none";
+  }
 });
 function playPause() {
   if (isPlaying) {

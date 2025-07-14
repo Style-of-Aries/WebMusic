@@ -31,7 +31,7 @@
         <i class="fa-solid fa-lock"></i>
       </div>
 
-      <span class="error"><?php echo $errorLogin ?></span>
+      <span class="errorLogin"><?php echo $errorLogin ?></span>
 
       <div class="remember-forgot">
         <label><input type="checkbox" name="remember"> Nhớ mật khẩu</label>
