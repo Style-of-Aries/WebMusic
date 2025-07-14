@@ -14,7 +14,9 @@ body{
   background-position: center;
   background-size: cover;
 }
-
+.error{
+  color: red;
+}
 .khung{
   width: 480px;
   background: transparent;
@@ -106,5 +108,16 @@ body{
 }
 .register-link p a:hover {
   text-decoration: underline;
+}
+.remember-errororgot{
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin:  15px;
+}
+.remember-errororgot a{
+
+  text-decoration: none;
+  color: #fff;
 }
 
