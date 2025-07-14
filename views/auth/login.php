@@ -21,7 +21,7 @@
     <form action="index.php?action=auth_login" method="post">
       <input type="" name="email" placeholder="Email" required>
       <input type="password" name="password" placeholder="Mật khẩu" required>
-      <span class="error"><?php echo $errorLogin ?></span>
+      <span class="errorLogin"><?php echo $errorLogin ?></span>
       <button type="submit" name="btn_login">Đăng nhập</button>
     </form>
     <!-- <button class="login-btn google">

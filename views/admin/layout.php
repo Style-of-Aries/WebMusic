@@ -281,12 +281,18 @@
                         <i class="ri-add-circle-line"></i> Thêm Bài Hát Mới
                     </a>
                 </li>
+                <!-- <li>
+                    <a href="index.php?controller=user&action=index" class="menu-link">
+                         Trang uer 
+                    </a>
+                </li> -->
             </ul>
 
         </div>
         <div class="main-content">
             <?php echo  $content ?? '' ?>
         </div>
+        
     </div>
     <!-- <div class="player-bar">
         <div class="player-left">
