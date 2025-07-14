@@ -4,7 +4,7 @@ class database{
     const USERNAME = 'root';
     const PASSWORD = '';
     const DB_NAME = 'webnhac';
-    
+
 
 
     public static function connect(){
