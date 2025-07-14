@@ -155,4 +155,9 @@ p a {
   color: red;
   margin-left: 88px;
   margin-bottom: 10px;
-} */
+}*/
+.errorLogin {
+  color: red;
+  /* margin-left: px; */
+  margin-bottom: 10px;
+}

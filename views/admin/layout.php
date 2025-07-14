@@ -281,6 +281,11 @@
                         <i class="ri-add-circle-line"></i> Thêm Bài Hát Mới
                     </a>
                 </li>
+                <!-- <li>
+                    <a href="index.php?controller=user&action=index" class="menu-link">
+                         Trang uer 
+                    </a>
+                </li> -->
             </ul>
 
         </div>
