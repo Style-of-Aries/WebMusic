@@ -33,7 +33,7 @@
 
       <span  class="error"><?php echo $errorLogin ?></span>
 
-      <div class="remember-errororgot">
+      <div class="remember-forgot">
         <label><input type="checkbox" name="remember"> Nhớ mật khẩu</label>
         <a href="#">Quên mật khẩu?</a>
       </div>
