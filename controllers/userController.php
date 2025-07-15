@@ -12,12 +12,12 @@ class UserController
     {
         $songs = $this->userModel->getSongs();
         $songsDomic = $this->userModel->getSongsDomic();
-        require_once './../views/user/list.php';
+        require_once './../views/user/songs/list.php';
     }
     public function bxh()
     {
         $songs = $this->userModel->getSongs();
-        require_once './../views/user/bxh.php';
+        require_once './../views/user/songs/bxh.php';
     }
     public function search()
 {
@@ -28,9 +28,9 @@ class UserController
         $songs = $this->userModel->searchSongs($keyword);
     } else $songs = null;
     ob_start();
-    include BASE_PATH . '/views/user/searchResult.php';
+    include BASE_PATH . '/views/user/songs/searchResult.php';
     $mainContent = ob_get_clean();
-    include BASE_PATH . '/views/user/layout.php';
+    include BASE_PATH . '/views/user/layout/layout.php';
 }
 
 }

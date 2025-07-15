@@ -23,5 +23,6 @@ ob_start();
 <?php endforeach; ?>
 <?php
 $mainContent = ob_get_clean();
-include './../views/user/layout.php';
+include __DIR__ . '/../layout/layout.php';
+
 ?>

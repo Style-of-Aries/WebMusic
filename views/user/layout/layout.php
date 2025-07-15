@@ -1,4 +1,5 @@
-<?php require_once __DIR__ . "/../../config/config.php";
+<?php 
+require_once __DIR__ . "/../../../config/config.php";
 session_start(); 
 ?>
 
@@ -17,16 +18,16 @@ session_start();
 
 <body>
     <div class="main">
-        <?php include 'sidebar.php'; ?>
+        <?php include __DIR__. '/sidebar.php'; ?>
         <div class="container">
-            <?php include 'header.php'; ?>
+            <?php include __DIR__. '/header.php'; ?>
             <div class="mainContent">
                 <div class="contentHeader">
                     <?= $mainContent ?>
                 </div>
             </div>
         </div>
-        <?php include 'footer.php'; ?>
+        <?php include __DIR__. '/footer.php'; ?>
     </div>
 </body>
 <script src="<?= BASE_URL ?>js/audio.js"></script>

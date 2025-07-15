@@ -37,5 +37,6 @@ ob_start();
 </div>
 <?php
 $mainContent = ob_get_clean();
-include(__DIR__ . '/layout.php');
+include __DIR__ . '/../layout/layout.php';
+
 ?>
