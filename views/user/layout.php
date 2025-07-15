@@ -1,4 +1,7 @@
-<?php require_once __DIR__ . "/../../config/config.php"; ?>
+<?php require_once __DIR__ . "/../../config/config.php";
+session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="<?= BASE_URL ?>css/styles.css">
+
 </head>
 
 <body>

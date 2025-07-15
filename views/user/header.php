@@ -1,12 +1,13 @@
-<!-- <div class="header">
-    <div class="homeSearch">
-        <input type="text" placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát...">
-        <i class="fas fa-search"></i>
-    </div>
-    <div class="avatarUser">
-        <a href="index.php?controller=admin&action=index"><img src="<?= BASE_URL ?>img/avatar.jpg" alt="avatar"></a>
-    </div>
-</div> -->
+<?php
+if (isset($_SESSION['user'])) {
+    $username = $_SESSION['user']['username'];
+} else {
+    $username = 'không có username';
+
+}
+
+?>
+
 <div class="header">
     <form class="homeSearch" action="index.php" method="get">
         <input type="hidden" name="controller" value="user">
@@ -15,10 +16,15 @@
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
     <div class="avatarUser" id="avatarWrapper">
-        <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="avatar" id="avatarBtn">
+        <img src="<?= BASE_URL ?>img/avatar.jpg" alt="avatar" id="avatarBtn">
         <div class="dropdownMenu" id="dropdownMenu">
-            <a href="index.php?controller=admin&action=index">👤 Trang quản trị</a>
-            <a href="logout.php">🚪 Đăng xuất</a>
+            <div class="username">
+                <?= htmlspecialchars($username); ?>
+            </div>
+            <?php if (isset($_SESSION['user']) && $_SESSION['user']['email'] === 'admin123'): ?>
+                <a href="index.php?controller=admin&action=index">👤 Trang quản trị</a>
+            <?php endif; ?>
+            <a href="index.php?controller=auth&action=logout">🚪 Đăng xuất</a>
         </div>
     </div>
 </div>

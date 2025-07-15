@@ -1,5 +1,6 @@
 <?php
 require_once "./../models/authModel.php";
+
 class authController
 {
 
@@ -18,6 +19,7 @@ class authController
     }
     public function auth_login()
     {
+        session_start();
         $errorLogin = "";
         // echo "<br>" . __METHOD__;
         if (isset($_POST['btn_login'])) {
@@ -29,7 +31,9 @@ class authController
             $user = $this->authModel->authUsersLogin($emailLogin, $passLogin);
             // var_dump($user);
             if ($user) {
+                $_SESSION['user'] = $user;
                 header('location:index.php?controller=user&action=index');
+                exit();
             } else {
                 $errorLogin = "Thông tin tài khoản mật khẩu không chính xác";
                 include_once "./../views/auth/login.php";
@@ -169,5 +173,12 @@ class authController
 
 
     //Xử lý chức năng đăng nhập
-
+    public function logout()
+    {
+        session_start();
+        session_unset();
+        session_destroy();
+        header("Location: index.php?controller=auth&action=login");
+        exit();
+    }
 }

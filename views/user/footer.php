@@ -28,7 +28,7 @@
         </div>
         <div class="time-line">
             <span id="timeChay">--:--</span>
-            <input type="range" id="rangeAudio">
+            <input type="range" id="rangeAudio" min="0" max="0" value="100">
             <span id="timeSong">--:--</span>
         </div>
     </div>
