@@ -48,4 +48,38 @@ class adminModel extends database
 
     // Your database connection and methods for admin-related data
 
+    public function getAllUser()
+    {
+        $sql = "select * from users";
+        $query = $this->_query($sql);
+
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+    }
+    public function deleteUser($id){
+        $sql="DELETE FROM users WHERE id=$id";
+        $query=$this->_query($sql);
+
+    }
+    public function getAllYt($id)
+    {
+        $sql = " SELECT 
+                s.image,
+                s.name ,
+                s.artist,
+                s.fileSong
+            FROM favorites f
+            JOIN songs s ON f.song_id = s.id
+            WHERE f.user_id = $id";
+        $query = $this->_query($sql);
+
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+    }
 }

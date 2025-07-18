@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 14, 2025 lúc 07:22 PM
+-- Thời gian đã tạo: Th7 18, 2025 lúc 12:43 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `favorites`
+--
+
+CREATE TABLE `favorites` (
+  `user_id` int(11) NOT NULL,
+  `song_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `favorites`
+--
+
+INSERT INTO `favorites` (`user_id`, `song_id`) VALUES
+(1, 4),
+(1, 5),
+(2, 4),
+(2, 6),
+(3, 10);
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `songs`
 --
 
@@ -40,7 +62,6 @@ CREATE TABLE `songs` (
 --
 
 INSERT INTO `songs` (`id`, `name`, `fileSong`, `image`, `artist`) VALUES
-(1, 'Gã săn cá', './../public/uploads/audio/gsc.mp3', './../public/uploads/img/gsc.jpg', 'EXSH'),
 (4, 'Phép màu', './../public/uploads/audio/pm.mp3', './../public/uploads/img/pm.jpg', 'MAYDAYs ft. Minh Tốc'),
 (5, 'Tràn bộ nhớ', './../public/uploads/audio/tbn.mp3', './../public/uploads/img/duongdomic.jpg', 'Dương Domic'),
 (6, 'Mất kết nối', './../public/uploads/audio/mkn.mp3', './../public/uploads/img/duongdomic.jpg', 'Dương Domic'),
@@ -60,7 +81,6 @@ CREATE TABLE `users` (
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
   `sodienthoai` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,27 +88,22 @@ CREATE TABLE `users` (
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `avatar`, `sodienthoai`) VALUES
-(1, 'nvtu1906', 'tutue9692@gmail.com', '123', NULL, 372016584),
-(2, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', NULL, 372016584),
-(3, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', NULL, 372016584),
-(4, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', NULL, 372016584),
-(5, 'Tứ Nguyễn', 'tutue969222@gmail.com', '123', NULL, 372016584),
-(6, 'Tứ Nguyễn', 'tutue9692222@gmail.com', '123', NULL, 372016584),
-(7, 'Tứ Nguyễn', 'tutue9692222@gmail.com', '123', NULL, 372016584),
-(8, 'nvtu1906', 'tutue9692@gmail.com', '123', NULL, 372016584),
-(9, 'Tứ Nguyễn', 'tutue9692@gmail.com', '123', NULL, 372016584),
-(10, 'Tứ Nguyễn', 'tutue9692@gmail.com', '123', NULL, 372016584),
-(11, 'nvtu1906', '', '', NULL, 372016584),
-(12, 'chuyenkongu', 'tutue9692222222@gmail.com', '123', NULL, 372016584),
-(13, 'nvtu190666', 'tutue96921@gmail.com', '123', NULL, 372016584),
-(14, 'nvtu19061111', 'tutue969112@gmail.com', '123', NULL, 372016584),
-(15, 'nvtu1906111', 'tutue9692@gmail.com1', '123', NULL, 372016584),
-(16, 'nvtu19062', '1tutue9692@gmail.com', '123', NULL, 372016584);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `sodienthoai`) VALUES
+(1, 'nvtu1906', 'tutue9692@gmail.com', '123', 372016584),
+(2, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', 372016584),
+(3, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', 372016584),
+(4, 'Tứ Nguyễn', 'tutue96922@gmail.com', '123', 372016584);
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `favorites`
+--
+ALTER TABLE `favorites`
+  ADD PRIMARY KEY (`user_id`,`song_id`),
+  ADD KEY `song_id` (`song_id`);
 
 --
 -- Chỉ mục cho bảng `songs`
@@ -117,6 +132,17 @@ ALTER TABLE `songs`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Các ràng buộc cho các bảng đã đổ
+--
+
+--
+-- Các ràng buộc cho bảng `favorites`
+--
+ALTER TABLE `favorites`
+  ADD CONSTRAINT `favorites_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`song_id`) REFERENCES `songs` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
