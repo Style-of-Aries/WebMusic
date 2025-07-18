@@ -277,6 +277,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="index.php?controller=admin&action=indexuser" class="menu-link">
+                        <i class="ri-bar-chart-fill"></i> Danh Sách Người Dùng
+                    </a>
+                </li>
+                <li>
                     <a href="index.php?controller=admin&action=add" class="menu-link">
                         <i class="ri-add-circle-line"></i> Thêm Bài Hát Mới
                     </a>
