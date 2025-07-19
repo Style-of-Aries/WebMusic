@@ -6,7 +6,7 @@
 }
 
 body{
-  display: flex;
+    display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -65,7 +65,7 @@ body{
   display: flex;
   justify-content: space-between;
   font-size: 14.5px;
-  margin: -15px 0 15px;
+  margin: 15px 0;
 }
 .remember-forgot label input {
   accent-color: #fff;

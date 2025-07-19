@@ -13,7 +13,8 @@
   </style>
 </head>
 
-<body>
+<body >
+  
   <div class="khung">
     <!-- <div class="logoWeb">
       <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
@@ -66,5 +67,6 @@
     <!-- <p>Bạn chưa có tài khoản?<a href="index.php?controller=auth&action=register">Đăng ký tài khoản</a></p> -->
   </div>
 </body>
+
 
 </html>

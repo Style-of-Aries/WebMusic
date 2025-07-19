@@ -19,7 +19,6 @@ class authController
     }
     public function auth_login()
     {
-        session_start();
         $errorLogin = "";
         // echo "<br>" . __METHOD__;
         if (isset($_POST['btn_login'])) {
@@ -31,6 +30,7 @@ class authController
             $user = $this->authModel->authUsersLogin($emailLogin, $passLogin);
             // var_dump($user);
             if ($user) {
+                session_start();
                 $_SESSION['user'] = $user;
                 header('location:index.php?controller=user&action=index');
                 exit();
