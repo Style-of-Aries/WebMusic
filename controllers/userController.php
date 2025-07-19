@@ -12,6 +12,7 @@ class UserController
     {
         $songs = $this->userModel->getSongs();
         $songsDomic = $this->userModel->getSongsDomic();
+        $songsEXSH = $this->userModel->getSongsEXSH();
         require_once './../views/user/songs/list.php';
     }
     public function bxh()

@@ -412,12 +412,14 @@ body {
   color: #b2b0b6;
 }
 .favoriteBtn {
-  margin: 0 60px;
+  margin-left: 60px;
   font-size: 1.4em;
   cursor: pointer;
 }
 #favoriteBtn {
   display: none;
+  position: absolute;
+  right: 0;
 }
 .player-controls {
   display: flex;

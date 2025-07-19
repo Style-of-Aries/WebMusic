@@ -22,7 +22,18 @@ class userModel extends database
     }
     public function getSongsDomic()
     {
-        $sql = "Select * from songs where artist='Dương Domic'";
+        $sql = "Select * from songs where artist like '%Dương Domic%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
+    public function getSongsEXSH()
+    {
+        $sql = "Select * from songs where artist like '%EXSH%'";
         $query = $this->_query($sql);
         $data = [];
         while ($row = mysqli_fetch_assoc($query)) {
