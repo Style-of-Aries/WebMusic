@@ -62,11 +62,11 @@ ob_start();
     </div>
     <div>
         <label for="thumbnail">Ảnh đại diện:</label>
-        <input type="file"  name="image" >
+        <input type="file"  name="image" value="<?= $song['image']?>" >
     </div>
     <div>
         <label for="audio">File nhạc (.mp3):</label>
-        <input type="file" id="audio" name="audio" accept="audio/*" >
+        <input type="file" id="audio" name="audio" accept="audio/*" value="<?= $song['fileSong']?>" >
     </div>
     <input type="submit" value="Cập nhật" name="btn_edit">
 </form>

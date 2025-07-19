@@ -93,6 +93,6 @@ class adminController
         $songyts=$this->model->getAllYt($id);
         require_once './../views/admin/users/listYt.php';
 
-
+        
     }
 }
