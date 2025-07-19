@@ -13,7 +13,6 @@ ob_start();
             <th>Tên bài hát</th>
             <th>Ca sĩ</th>
             <th>Audio</th>
-            <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -25,10 +24,6 @@ ob_start();
             <td><?= htmlspecialchars($songyt['name']) ?></td>
             <td><?= htmlspecialchars($songyt['artist']) ?></td>
             <td><audio src="<?= htmlspecialchars($songyt['fileSong']) ?>" controls  muted></audio></td>
-            <td>
-              <a href="index.php?controller=admin&action=edit&id=<?= $song['id'] ?>" class="action-btn edit-btn"><i class="ri-pencil-line"></i> Sửa</a>
-              <a href="index.php?controller=admin&action=delete&id=<?= $song['id'] ?>" class="action-btn delete-btn" onclick="return confirm('Xóa bài hát này?')"><i class="ri-delete-bin-line"></i> Xóa</a>
-            </td>
           </tr>
           <?php endforeach ?>
         </tbody>
