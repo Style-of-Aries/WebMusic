@@ -59,7 +59,7 @@ ob_start();
         <input type="text" id="artist" name="artist" >
     </div>
     <div>
-        <label for="thumbnail">Ảnh đại diện:</label>
+        <label for="thumbnail">Ảnh nhạc:</label>
         <input type="file"  name="image" >
     </div>
     <div>
