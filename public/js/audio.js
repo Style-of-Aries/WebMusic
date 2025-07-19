@@ -1,4 +1,3 @@
-let songs = [];
 // fetch("../api/getSongs.php")
 //   .then((res) => res.json())
 //   .then((data) => {
@@ -41,7 +40,7 @@ let songs = [];
 //   })
 
 //   .catch((error) => console.error("Lỗi khi lấy danh sách bài hát:", error));
-
+let songs = [];
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
 const music = document.getElementById("music");
@@ -68,7 +67,6 @@ let isRepeat = false;
 let isRandom = false;
 let time = setInterval(displayTime, 500);
 playBtn.addEventListener("click", playPause);
-favoriteBtn.addEventListener("click", function () {});
 nextBtn.addEventListener("click", function () {
   doibai(1);
 });
@@ -83,6 +81,11 @@ randomBtn.addEventListener("click", onOffRandom);
 //     music.volume = this.value / 100;
 // });
 volumeBtn.addEventListener("click", tatTieng);
+document.addEventListener("keydown", function (e) {
+  if (e.key === "m" || e.key === "M") {
+    tatTieng();
+  }
+});
 rangeVolume.addEventListener("input", function () {
   const value = parseInt(this.value);
   music.volume = value / 100;
@@ -94,9 +97,11 @@ document.querySelectorAll(".card").forEach((card) => {
     const playlist = this.dataset.playlist;
     const index = this.dataset.index; // ép kiểu
     const audio = this.dataset.song;
+    const id = this.dataset.id;
     console.log("Vị trí bài hát:", index);
     console.log("Playlist: ", playlist);
     console.log("File bài hát:", audio);
+    console.log("ID bài:", id);
 
     if (vitribai === index) {
       playPause();
@@ -121,6 +126,7 @@ document.querySelectorAll(".card").forEach((card) => {
 
 document.querySelectorAll(".card").forEach((card, index) => {
   const song = {
+    id: card.dataset.id,
     name: card.dataset.name,
     image: card.dataset.img,
     artist: card.dataset.artist,
@@ -141,6 +147,32 @@ window.addEventListener("click", function (e) {
     dropdownMenu.style.display = "none";
   }
 });
+
+favoriteBtn.addEventListener("click", function () {
+  const song = songs[vitribai]; // bài đang phát
+  if (!song || !song.id) return;
+
+  fetch("index.php?controller=user&action=toggleFavorite", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "song_id=" + song.id,
+  })
+    .then((res) => res.text())
+    .then((data) => {
+      console.log("Server response:", data);
+      const icon = favoriteBtn.querySelector("i");
+      if (data === "added") {
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+      } else if (data === "removed") {
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+      }
+    });
+});
+
 function playPause() {
   if (isPlaying) {
     music.play();
@@ -211,12 +243,6 @@ function formatTime(time) {
   const giay = Math.floor(time - phut * 60);
   return `${phut < 10 ? "0" + phut : phut}:${giay < 10 ? "0" + giay : giay}`;
 }
-// function khoitaoSong(vitribai) {
-//     nameSong.textContent = songs[vitribai].name;
-//     music.setAttribute("src", `/WebMusic/public/uploads/music/${songs[vitribai].fileSong}`);
-//     imgSong.setAttribute("src", `/WebMusic/public/uploads/img/${songs[vitribai].image}`);
-
-// }
 function khoitaoSong(vitribai) {
   const song = songs[vitribai];
   const src = songs[vitribai].image;
@@ -233,6 +259,7 @@ function khoitaoSong(vitribai) {
     imgSong.style.display = "block";
   }
   document.getElementById("favoriteBtn").style.display = "block";
+  checkFavorite(song.id);
   if (songs[vitribai]) {
     console.log("Bài hiện tại:", vitribai, songs[vitribai].fileSong);
   }
@@ -294,4 +321,25 @@ function tatTieng() {
     isMute = true;
   }
   console.log("isMute = " + isMute);
+}
+
+function checkFavorite(songId) {
+  fetch("index.php?controller=user&action=isFavorite", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "song_id=" + songId,
+  })
+    .then((res) => res.text())
+    .then((data) => {
+      const icon = favoriteBtn.querySelector("i");
+      if (data === "true") {
+        icon.classList.remove("fa-regular");
+        icon.classList.add("fa-solid");
+      } else {
+        icon.classList.remove("fa-solid");
+        icon.classList.add("fa-regular");
+      }
+    });
 }

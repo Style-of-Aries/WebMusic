@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 $controllerName = $_GET['controller'] ?? 'auth';
 $action = $_GET['action'] ?? 'login';
 // echo $controllerName ."<br>". $action;

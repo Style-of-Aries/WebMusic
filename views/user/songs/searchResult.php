@@ -1,13 +1,9 @@
 <h2>Kết quả tìm kiếm: </h2>
-
 <?php if (!empty($songs)): ?>
   <?php foreach ($songs as $index => $song): ?>
-    <div class="card search-item"
-         data-index="<?= $index; ?>"
-         data-name="<?= htmlspecialchars($song['name']); ?>"
-         data-artist="<?= htmlspecialchars($song['artist']); ?>"
-         data-img="<?= htmlspecialchars($song['image']); ?>"
-         data-song="<?= htmlspecialchars($song['fileSong']); ?>">
+    <div class="card search-item" data-index="<?= $index; ?>" data-id="<?= $song['id']; ?>"
+      data-name="<?= htmlspecialchars($song['name']); ?>" data-artist="<?= htmlspecialchars($song['artist']); ?>"
+      data-img="<?= htmlspecialchars($song['image']); ?>" data-song="<?= htmlspecialchars($song['fileSong']); ?>">
 
       <div class="search-number"><?= $index + 1 ?></div>
 
