@@ -6,15 +6,15 @@
     <label for="toggle-menu" class="toggle-btn">☰</label>
     <div class="sidebar-content">
         <ul class="nav-ul">
-            <li class="nav-li"><a href="index.php?controller=user&action=favorite">
+            <li class="nav-li"><a href="index.php?controller=user&action=favorite" class="ajax-link">
                     <i class="fa-solid fa-heart"></i>
                     <span>Yêu thích</span>
                 </a></li>
-            <li class="nav-li"><a href="index.php?controller=user&action=index">
+            <li class="nav-li"><a href="index.php?controller=user&action=index" class="ajax-link">
                     <i class="fas fa-compact-disc"></i>
                     <span>Khám phá</span>
                 </a></li>
-            <li class="nav-li"><a href="index.php?controller=user&action=bxh">
+            <li class="nav-li"><a href="index.php?controller=user&action=bxh" class="ajax-link">
                     <i class="fas fa-chart-line"></i>
                     <span>BXH Nhạc Mới</span>
                 </a></li>

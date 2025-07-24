@@ -14,7 +14,9 @@
 
       <div class="search-title"><?= htmlspecialchars($song['name']) ?></div>
       <div class="search-artist"><?= htmlspecialchars($song['artist']) ?></div>
-      <div class="search-time">00:00</div>
+      <!-- <div class="favoriteBtn" data-id="<?= $song['id']; ?>">
+        <i class="fa-regular fa-heart"></i>
+      </div> -->
     </div>
   <?php endforeach; ?>
 <?php else: ?>

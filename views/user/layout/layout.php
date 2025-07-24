@@ -21,11 +21,10 @@ require_once __DIR__ . "/../../../config/config.php";
         <?php include __DIR__ . '/sidebar.php'; ?>
         <div class="container">
             <?php include __DIR__ . '/header.php'; ?>
-            <div class="mainContent">
-                <div class="contentHeader">
-                    <?= $mainContent ?>
-                </div>
+            <div class="mainContent" id="main-content">
+                <?= $mainContent ?>
             </div>
+
         </div>
         <?php include __DIR__ . '/footer.php'; ?>
     </div>

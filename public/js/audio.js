@@ -56,7 +56,7 @@ const randomBtn = document.getElementById("randomBtn");
 const rangeVolume = document.getElementById("rangeVolume");
 const volumeBtn = document.getElementById("volumeBtn");
 const card_playBtn = document.getElementById("card_playBtn");
-const favoriteBtn = document.getElementById("favoriteBtn");
+
 const avatarBtn = document.getElementById("avatarBtn");
 const dropdownMenu = document.getElementById("dropdownMenu");
 
@@ -92,14 +92,17 @@ rangeVolume.addEventListener("input", function () {
 
   this.style.background = `linear-gradient(to right, white ${value}%, rgba(255,255,255,0.2) ${value}%)`;
 });
+
 document.querySelectorAll(".card").forEach((card) => {
-  card.addEventListener("click", function () {
-    const playlist = this.dataset.playlist;
-    const index = this.dataset.index; // ép kiểu
+  card.addEventListener("click", function (e) {
+    const playBtn = e.target.closest(".play-btn");
+    if (!playBtn) return; // Chỉ xử lý khi click vào play-btn (hoặc play-icon bên trong)
+
+    const index = parseInt(this.getAttribute("data-index"));
     const audio = this.dataset.song;
     const id = this.dataset.id;
+
     console.log("Vị trí bài hát:", index);
-    console.log("Playlist: ", playlist);
     console.log("File bài hát:", audio);
     console.log("ID bài:", id);
 
@@ -113,7 +116,7 @@ document.querySelectorAll(".card").forEach((card) => {
     } else {
       vitribai = index;
       isPlaying = true;
-      khoitaoSong(vitribai, playlist);
+      khoitaoSong(vitribai);
       playPause();
       document
         .querySelectorAll(".play-icon")
@@ -123,6 +126,8 @@ document.querySelectorAll(".card").forEach((card) => {
     }
   });
 });
+
+
 
 document.querySelectorAll(".card").forEach((card, index) => {
   const song = {
@@ -148,29 +153,37 @@ window.addEventListener("click", function (e) {
   }
 });
 
-favoriteBtn.addEventListener("click", function () {
-  const song = songs[vitribai]; // bài đang phát
-  if (!song || !song.id) return;
+document.querySelectorAll(".favoriteBtn").forEach((btn) => {
+  btn.addEventListener("click", function () {
+    const songId = this.getAttribute("data-id");
+    if (!songId) return;
 
-  fetch("index.php?controller=user&action=toggleFavorite", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: "song_id=" + song.id,
-  })
-    .then((res) => res.text())
-    .then((data) => {
-      console.log("Server response:", data);
-      const icon = favoriteBtn.querySelector("i");
-      if (data === "added") {
-        icon.classList.remove("fa-regular");
-        icon.classList.add("fa-solid");
-      } else if (data === "removed") {
-        icon.classList.remove("fa-solid");
-        icon.classList.add("fa-regular");
-      }
-    });
+    fetch("index.php?controller=user&action=toggleFavorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: "song_id=" + songId,
+    })
+      .then((res) => res.text())
+      .then((data) => {
+        // Tìm tất cả các nút favorite có cùng songId
+        const allFavBtns = document.querySelectorAll(
+          `.favoriteBtn[data-id="${songId}"]`
+        );
+
+        allFavBtns.forEach((btn) => {
+          const icon = btn.querySelector("i");
+          if (data === "added") {
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+          } else if (data === "removed") {
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+          }
+        });
+      });
+  });
 });
 
 function playPause() {
@@ -250,6 +263,7 @@ function khoitaoSong(vitribai) {
     console.error("Không tìm thấy bài hát tại vị trí:", vitribai);
     return;
   }
+  document.getElementById("favoriteBtn").setAttribute("data-id", song.id);
   nameArtist.textContent = song.artist;
   nameSong.textContent = song.name;
   music.src = song.fileSong;

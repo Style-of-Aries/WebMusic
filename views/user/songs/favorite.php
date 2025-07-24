@@ -14,9 +14,6 @@
 
     <div class="favorite-title"><?= htmlspecialchars($song['name']) ?></div>
     <div class="favorite-artist"><?= htmlspecialchars($song['artist']) ?></div>
-    <div class="favorite-time">00:00</div>
-
-    <!-- Nút yêu thích (đã là yêu thích nên là solid) -->
     <div class="favoriteBtn" data-id="<?= $song['id']; ?>">
       <i class="fa-solid fa-heart"></i>
     </div>

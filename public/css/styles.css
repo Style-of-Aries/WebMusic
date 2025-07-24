@@ -327,7 +327,7 @@ body {
   border-bottom: 1px solid #333;
 }
 
-.play-btn {
+.list-item .play-btn {
   position: absolute;
   bottom: 80px;
   right: 15px;
@@ -343,7 +343,7 @@ body {
   transition: transform 0.3s;
 }
 
-.card:hover .play-btn {
+.card:hover .list-item .play-btn {
   transform: scale(1.1);
 }
 
@@ -420,6 +420,9 @@ body {
   display: none;
   position: absolute;
   right: 0;
+}
+.favoriteBtn:hover {
+  color: #ff8efb;
 }
 .player-controls {
   display: flex;
@@ -558,7 +561,7 @@ input[type="range"] {
   border-radius: 6px;
 }
 
-.bxh-thumb-wrapper .play-icon {
+.bxh-thumb-wrapper .play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -567,12 +570,12 @@ input[type="range"] {
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 999px;
   display: none;
-  pointer-events: none;
+  z-index: 2;
 }
 
-.bxh-thumb-wrapper:hover .play-icon {
+.bxh-thumb-wrapper:hover .play-btn {
   display: block;
 }
 
