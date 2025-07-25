@@ -632,7 +632,7 @@ input[type="range"] {
   border-radius: 6px;
 }
 
-.favorite-thumb-wrapper .play-icon {
+.favorite-thumb-wrapper .play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -641,12 +641,12 @@ input[type="range"] {
   color: white;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 8px;
-  border-radius: 50%;
+  border-radius: 999px;
   display: none;
-  pointer-events: none;
+  z-index: 2;
 }
 
-.favorite-thumb-wrapper:hover .play-icon {
+.favorite-thumb-wrapper:hover .play-btn {
   display: block;
 }
 
