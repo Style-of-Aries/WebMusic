@@ -9,7 +9,9 @@
 
       <div class="search-thumb-wrapper">
         <img src="<?= $song['image'] ?>" alt="<?= htmlspecialchars($song['name']) ?>" class="search-thumb">
-        <i class="fa-solid fa-play play-icon"></i>
+        <div class="play-btn">
+          <i class="fa-solid fa-play play-icon"></i>
+        </div>
       </div>
 
       <div class="search-title"><?= htmlspecialchars($song['name']) ?></div>

@@ -289,6 +289,7 @@ body {
   margin-top: 16px;
   display: flex;
   gap: 25px;
+  overflow-y: hidden;
 }
 .playlist-container::-webkit-scrollbar {
   height: 6px;
@@ -704,7 +705,7 @@ input[type="range"] {
   border-radius: 6px;
 }
 
-.search-thumb-wrapper .play-icon {
+.search-thumb-wrapper .play-btn {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -715,10 +716,9 @@ input[type="range"] {
   padding: 8px;
   border-radius: 50%;
   display: none;
-  pointer-events: none;
 }
 
-.search-thumb-wrapper:hover .play-icon {
+.search-thumb-wrapper:hover .play-btn {
   display: block;
 }
 
