@@ -305,38 +305,6 @@
         </div>
         
     </div>
-    <!-- <div class="player-bar">
-        <div class="player-left">
-            <img src="https://via.placeholder.com/56" alt="thumb">
-            <div class="song-info">
-                <h4>Sự Thật Đã Bỏ Quên (Qinn Remix)</h4>
-                <p>Qinn Media, Hà Duy Thái</p>
-            </div>
-            <i class="ri-heart-line"></i>
-        </div>
-        <div class="player-center">
-            <div class="controls">
-                <i class="ri-shuffle-line"></i>
-                <i class="ri-skip-back-line"></i>
-                <i class="ri-play-circle-line play-btn"></i>
-                <i class="ri-skip-forward-line"></i>
-                <i class="ri-repeat-line"></i>
-            </div>
-            <div class="progress">
-                <span>02:59</span>
-                <input type="range" class="progress-bar">
-                <span>04:58</span>
-            </div>
-        </div>
-        <div class="player-right">
-            <span class="tag">MV</span>
-            <i class="ri-mic-line"></i>
-            <i class="ri-tv-line"></i>
-            <i class="ri-volume-up-line"></i>
-            <input type="range" class="volume-bar">
-            <i class="ri-play-list-line"></i>
-        </div>
-    </div> -->
 </body>
 
 </html>
