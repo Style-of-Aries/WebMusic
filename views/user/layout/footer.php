@@ -7,7 +7,7 @@
             <div id="nameSong" class="nameSong"></div>
             <div id="nameArtist" class="nameArtist"></div>
         </div>
-        <div id="favoriteBtn" class="favoriteBtn">
+        <div id="favoriteBtn" class="favoriteBtn" data-id="">
             <i class="fa-regular fa-heart"></i>
         </div>
     </div>

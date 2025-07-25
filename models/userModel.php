@@ -31,6 +31,61 @@ class userModel extends database
         return $data;
 
     }
+    public function getSongsHTH()
+    {
+        $sql = "Select * from songs where artist like '%HIEUTHUHAI%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
+    public function getSongsWn()
+    {
+        $sql = "Select * from songs where artist like '%W/n%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
+    public function getSongsMTP()
+    {
+        $sql = "Select * from songs where artist like '%Sơn Tùng MTP%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
+    public function getSongsWren()
+    {
+        $sql = "Select * from songs where artist like '%Wren Evans%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
+    public function getSongsDrt()
+    {
+        $sql = "Select * from songs where artist like '%Dangrangto%'";
+        $query = $this->_query($sql);
+        $data = [];
+        while ($row = mysqli_fetch_assoc($query)) {
+            array_push($data, $row);
+        }
+        return $data;
+
+    }
     public function getSongsEXSH()
     {
         $sql = "Select * from songs where artist like '%EXSH%'";

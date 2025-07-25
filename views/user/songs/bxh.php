@@ -10,12 +10,17 @@ ob_start();
 
     <div class="bxh-thumb-wrapper">
       <img src="<?= $song['image'] ?>" alt="<?= htmlspecialchars($song['name']) ?>" class="bxh-thumb">
-      <i class="fa-solid fa-play play-icon"></i>
+      <div class="play-btn">
+        <i class="fa-solid fa-play play-icon"></i>
+      </div>
     </div>
 
     <div class="bxh-title"><?= htmlspecialchars($song['name']) ?></div>
     <div class="bxh-artist"><?= htmlspecialchars($song['artist']) ?></div>
-    <div id="bxh-timeSong">00:00</div>
+    <div id="bxh-timeSong"><?= $song['duration'] ?></div>
+    <!-- <div class="favoriteBtn" data-id="<?= $song['id']; ?>">
+      <i class="fa-regular fa-heart"></i>
+    </div> -->
   </div>
 <?php endforeach; ?>
 <?php

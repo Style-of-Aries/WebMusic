@@ -286,11 +286,17 @@
                         <i class="ri-add-circle-line"></i> Thêm Bài Hát Mới
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="index.php?controller=user&action=index" class="menu-link">
-                         Trang uer 
+                <li>
+                    <a href="index.php?controller=auth&action=logout" class="menu-link">
+                         🚪 Đăng Xuất
                     </a>
-                </li> -->
+                </li>
+                
+                    <!-- <li>
+                        <a href="index.php?controller=user&action=index" class="menu-link">
+                            Trang uer 
+                        </a>
+                    </li> -->
             </ul>
 
         </div>
