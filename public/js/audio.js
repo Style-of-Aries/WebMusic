@@ -82,15 +82,28 @@ randomBtn.addEventListener("click", onOffRandom);
 // });
 volumeBtn.addEventListener("click", tatTieng);
 document.addEventListener("keydown", function (e) {
-  if (e.key === "m" || e.key === "M") {
-    tatTieng();
+  switch (e.key.toLowerCase()) {
+    case "m":
+      tatTieng();
+      break;
+
+    case "p":
+      playPause();
+      break;
+
+    default:
+      // Không làm gì nếu không trùng
+      break;
   }
 });
+
 rangeVolume.addEventListener("input", function () {
   const value = parseInt(this.value);
   music.volume = value / 100;
-
-  this.style.background = `linear-gradient(to right, white ${value}%, rgba(255,255,255,0.2) ${value}%)`;
+  if(music.volume == 0) {
+    volumeBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`; 
+  }
+  // this.style.background = `linear-gradient(to right, white ${value}%, rgba(255,255,255,0.2) ${value}%)`;
 });
 
 document.querySelectorAll(".card").forEach((card) => {
