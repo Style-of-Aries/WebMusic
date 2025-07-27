@@ -151,6 +151,9 @@
         .edit-btn {
             background-color: #ffc107;
         }
+        .yt-btn {
+            background-color: #28ff07ff;
+        }
 
         .delete-btn {
             background-color: #dc3545;
@@ -284,6 +287,11 @@
                 <li>
                     <a href="index.php?controller=admin&action=add" class="menu-link">
                         <i class="ri-add-circle-line"></i> Thêm Bài Hát Mới
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php?controller=admin&action=addUser" class="menu-link">
+                        <i class="ri-add-circle-line"></i> Thêm Bài Người Dùng
                     </a>
                 </li>
                 <li>

@@ -31,8 +31,19 @@ class adminModel extends database
         $query = $this->_query($sql);
         return mysqli_fetch_assoc($query);
     }
+    public function getUserId($id)
+    {
+        $sql = "select * from users where id='$id'";
+        $query = $this->_query($sql);
+        return mysqli_fetch_assoc($query);
+    }
+
     public function updateSong($id,$name, $cs, $image, $audio){
         $sql = "UPDATE songs SET name='$name', fileSong='$audio', image = '$image' ,artist='$cs'  WHERE id='$id'";
+        $query=$this->_query($sql);
+    }
+    public function updateUser($id,$userNameRegister, $emailRegister, $passRegister){
+        $sql = "UPDATE users SET username='$userNameRegister', email='$emailRegister', password = '$passRegister' WHERE id='$id'";
         $query=$this->_query($sql);
     }
     public function deleteSong($id){
@@ -81,5 +92,25 @@ class adminModel extends database
             array_push($data, $row);
         }
         return $data;
+    }
+    public function authEmail($emailRegister){
+        $sql="Select *from users where email='$emailRegister'";
+        $query=$this->_query($sql);
+        if(mysqli_num_rows($query)>0){
+            return true;
+        }
+    }
+    public function authUserName($userNameRegister){
+        $sql="Select *from users where username='$userNameRegister'";
+        $query=$this->_query($sql);
+        if(mysqli_num_rows($query)>0){
+            return true;
+        }
+    }
+    // Thêm tài khoản vào bảng users
+    public function authUsers($userNameRegister,$emailRegister,$passRegister){
+
+        $sql="INSERT INTO users(username,email,password,sodienthoai) VALUES ('$userNameRegister','$emailRegister','$passRegister')";
+        $query=$this->_query($sql);
     }
 }

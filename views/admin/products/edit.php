@@ -48,7 +48,7 @@ ob_start();
     }
 </style>
 
-<h2>Thêm bài hát mới</h2>
+<h2>Sửa bài hát</h2>
 <form class="song-form" action="index.php?controller=admin&action=update" method="POST" enctype="multipart/form-data">
     <input type="hidden" name="id" value=" <?= $song['id'] ?>">
 

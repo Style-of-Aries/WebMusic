@@ -18,7 +18,7 @@ ob_start();
             <th>UserName</th>
             <th>Email</th>
             <th>PassWord</th>
-            <th>Số điện thoại</th>
+            <!-- <th>Số điện thoại</th> -->
             <th>Hành Động</th>
           </tr>
         </thead>
@@ -30,9 +30,9 @@ ob_start();
             <td><a href="index.php?controller=admin&action=yeuThich&id=<?= $user['id'] ?>&user=<?=$user['username'] ?>"><?= htmlspecialchars($user['username']) ?></a></td>
             <td><?= htmlspecialchars($user['email']) ?></td>
             <td><?= htmlspecialchars($user['password']) ?></td>
-            <td><?= htmlspecialchars($user['sodienthoai']) ?></td>
             <td>
-              <a href="index.php?controller=admin&action=yeuThich&id=<?= $user['id'] ?>&user=<?=$user['username'] ?>" class="action-btn edit-btn"><i class="ri-pencil-line"></i>Danh sách yêu thích</a>
+              <a href="index.php?controller=admin&action=yeuThich&id=<?= $user['id'] ?>&user=<?=$user['username'] ?>" class="action-btn yt-btn"><i class="ri-pencil-line"></i>Danh sách yêu thích</a>
+              <a href="index.php?controller=admin&action=edit_User&id=<?= $user['id'] ?>&user=<?=$user['username'] ?>" class="action-btn edit-btn"><i class="ri-pencil-line"></i>Sửa thông tin</a>
               <a href="index.php?controller=admin&action=deleteUser&id=<?= $user['id'] ?>" class="action-btn delete-btn" onclick="return confirm('Xóa người dùng này?')"><i class="ri-delete-bin-line"></i> Xóa người dùng</a>
             </td>
           </tr>
