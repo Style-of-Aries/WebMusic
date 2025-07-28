@@ -2,7 +2,7 @@
     <form class="homeSearch" id="search-form" action="index.php" method="get">
         <input type="hidden" name="controller" value="user">
         <input type="hidden" name="action" value="search">
-        <input type="text" name="keyword" placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..." required>
+        <input type="text" name="keyword" placeholder="Tìm kiếm bài hát, nghệ sĩ..." required>
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
     <?php if (isset($_SESSION['user'])): ?>

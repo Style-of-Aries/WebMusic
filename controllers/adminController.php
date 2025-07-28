@@ -110,7 +110,6 @@ class adminController
             $passRegister = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
             $sdtRegister = $_POST['phone'];
-
             // Validate từng trường
             if (empty($userNameRegister)) {
                 $errorName = "Vui lòng không để trống";
@@ -119,7 +118,6 @@ class adminController
             } else {
                 $vlName = $userNameRegister;
             }
-
             if (empty($emailRegister)) {
                 $errorEmail = "Vui lòng không để trống";
             } elseif ($this->model->authEmail($emailRegister)) {
@@ -127,38 +125,32 @@ class adminController
             } else {
                 $vlEmail = $emailRegister;
             }
-
             if (empty($passRegister)) {
                 $errorPass = "Vui lòng không để trống";
             } else {
                 $vlPass = $passRegister;
             }
-
             if ($confirm_password !== $passRegister) {
                 $errorCfPass = "Mật khẩu không chính xác";
             } else {
                 $vlCfPass = $confirm_password;
             }
-
             if (empty($sdtRegister)) {
                 $errorsdt = "Vui lòng không để trống";
             } else {
                 $vlSdt = $sdtRegister;
             }
-
             // Nếu không có lỗi thì đăng ký và chuyển trang
             if (
                 empty($errorName) && empty($errorEmail) && empty($errorPass)
                 && empty($errorCfPass) && empty($errorsdt)
             ) {
                 $this->model->authUsers($userNameRegister, $emailRegister, $passRegister, $sdtRegister);
-
                 // ✅ Chuyển hướng đến trang login và dừng lại
                 $this->indexUser();
                 exit;
             }
         }
-
         // ✅ Chỉ include form nếu chưa đăng ký hoặc có lỗi
         include_once "./../views/admin/users/add.php";
     }
