@@ -7,11 +7,11 @@
     <!-- <div class="logoWeb">
         <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
     </div> -->
-    <form action="index.php?action=auth_register" method="post">
+    <form action="index.php?controller=auth&action=auth_register" method="post" enctype="multipart/form-data">
         <h2>Đăng ký</h2>
 
         <div class="input-box">
-            <input type="text" name="username" placeholder="Tên đăng nhập" value="<?php echo $vlName; ?>" required>
+            <input type="text" name="username" placeholder="Nickname" value="<?php echo $vlName; ?>" required>
             <i class="fa-solid fa-user"></i>
             <span class="error"><?php echo $errorName ?></span>
         </div>
@@ -40,11 +40,14 @@
             <i class="fa-solid fa-phone"></i>
             <span class="error"><?php echo $errorsdt ?></span>
         </div>
-
+        <div class="input-box">
+            <input type="file" name="image" id="image" accept="image/*" value="<?php echo $vlImage; ?>" required>
+            <i class="fa-solid fa-image"></i>
+        </div>
         <button type="submit" name="btn_register" class="btn">Đăng ký</button>
 
         <div class="register-link">
-            <p>Đã có tài khoản? <a href="index.php?action=login">Đăng nhập</a></p>
+            <p>Đã có tài khoản? <a href="index.php?controller=auth&action=login">Đăng nhập</a></p>
         </div>
     </form>
 

@@ -1,45 +1,3 @@
-// fetch("../api/getSongs.php")
-//   .then((res) => res.json())
-//   .then((data) => {
-//     songs = data;
-//     console.log("Danh sách bài hát:", songs);
-//     vitribai = null;
-//     khoitaoSong(vitribai);
-
-//     document.querySelectorAll(".song-table tbody tr").forEach((row) => {
-//       row.addEventListener("click", function () {
-//         const index = parseInt(this.getAttribute("data-index"));
-//         console.log("Vị trí bài hát:", index);
-//         console.log("File bài hát:", songs[index].fileSong);
-//         if (isNaN(index)) return;
-
-//         if (vitribai === index) {
-//           playPause();
-//           const icon = this.querySelector(".icon-overlay i");
-//           if (icon)
-//             icon.className = isPlaying
-//               ? "fa-solid fa-play"
-//               : "fa-solid fa-pause";
-//         } else {
-//           vitribai = index;
-//           isPlaying = true;
-//           khoitaoSong(vitribai);
-//           playPause();
-//           document
-//             .querySelectorAll(".song-table tbody tr")
-//             .forEach((r) => r.classList.remove("active"));
-//           this.classList.add("active");
-//           document
-//             .querySelectorAll(".icon-overlay i")
-//             .forEach((icon) => (icon.className = "fa-solid fa-play"));
-//           const icon = this.querySelector(".icon-overlay i");
-//           if (icon) icon.className = "fa-solid fa-pause";
-//         }
-//       });
-//     });
-//   })
-
-//   .catch((error) => console.error("Lỗi khi lấy danh sách bài hát:", error));
 let songs = [];
 const nextBtn = document.getElementById("nextBtn");
 const prevBtn = document.getElementById("prevBtn");
@@ -55,16 +13,49 @@ const repeatBtn = document.getElementById("repeatBtn");
 const randomBtn = document.getElementById("randomBtn");
 const rangeVolume = document.getElementById("rangeVolume");
 const volumeBtn = document.getElementById("volumeBtn");
-const card_playBtn = document.getElementById("card_playBtn");
-
+const overlay = document.getElementById("overlay");
+const popupUpload = document.getElementById("popupUpload");
+const uploadMusic = document.getElementById("uploadMusic");
 const avatarBtn = document.getElementById("avatarBtn");
 const dropdownMenu = document.getElementById("dropdownMenu");
-
+const closePopup = document.getElementById("closePopup");
+const deleteBtn = document.getElementById("deleteBtn");
+const popupAddPlaylist = document.getElementById("popupAddPlaylist");
+const addPlaylistBtn = document.getElementById("addPlaylistBtn");
+const editPlaylistBtns = document.querySelectorAll(".editPlaylistBtn");
+const popupEditPlaylist = document.getElementById("popupEditPlaylist");
+const playlistPopup = document.getElementById("playlistPopup");
+const closePlaylistPopup = document.getElementById("closeplaylistPopup");
 let isMute = false;
 let isPlaying = true;
 let vitribai = null;
 let isRepeat = false;
 let isRandom = false;
+
+function hideFlashMessage() {
+  // Tìm phần tử thông báo bằng ID
+  var messageElement = document.getElementById("flash-message");
+
+  // Kiểm tra xem phần tử có tồn tại không
+  if (messageElement) {
+    // 2. Ẩn thông báo bằng cách thay đổi CSS
+    // Cách đơn giản: đặt display thành 'none'
+    messageElement.style.display = "none";
+
+    /* HOẶC: Sử dụng class để ẩn dần (tạo hiệu ứng đẹp hơn)
+            Bạn sẽ cần thêm CSS cho class 'hidden'
+            messageElement.classList.add('hidden');
+            */
+  }
+}
+
+// 3. Thiết lập bộ đếm thời gian (Timer)
+// Thiết lập thời gian chờ (ví dụ: 4000 mili giây = 4 giây)
+var hideDelay = 2000;
+
+// Gọi hàm hideFlashMessage() sau khi thời gian chờ kết thúc
+// Đây là dòng mã quan trọng nhất để tạo tính năng tự động ẩn
+setTimeout(hideFlashMessage, hideDelay);
 let time = setInterval(displayTime, 500);
 playBtn.addEventListener("click", playPause);
 nextBtn.addEventListener("click", function () {
@@ -97,11 +88,14 @@ document.addEventListener("keydown", function (e) {
   }
 });
 
+
 rangeVolume.addEventListener("input", function () {
   const value = parseInt(this.value);
   music.volume = value / 100;
-  if(music.volume == 0) {
-    volumeBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`; 
+  if (music.volume == 0) {
+    volumeBtn.innerHTML = `<i class="fa-solid fa-volume-xmark"></i>`;
+  } else {
+    volumeBtn.innerHTML = `<i class="fa-solid fa-volume-high"></i>`;
   }
   // this.style.background = `linear-gradient(to right, white ${value}%, rgba(255,255,255,0.2) ${value}%)`;
 });
@@ -140,8 +134,6 @@ document.querySelectorAll(".card").forEach((card) => {
   });
 });
 
-
-
 document.querySelectorAll(".card").forEach((card, index) => {
   const song = {
     id: card.dataset.id,
@@ -164,6 +156,17 @@ window.addEventListener("click", function (e) {
   if (!dropdownMenu.contains(e.target)) {
     dropdownMenu.style.display = "none";
   }
+});
+document.querySelectorAll(".iconAddPlaylist").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const songId = btn.getAttribute("data-song_id");
+    console.log("Song ID to add to playlist:", songId);
+    document.querySelectorAll('input[name="song_id"]').forEach((input) => {
+      input.value = songId;
+    });
+    document.getElementById("playlistPopup").style.display = "block";
+    overlay.style.display = "block";
+  });
 });
 
 document.querySelectorAll(".favoriteBtn").forEach((btn) => {
@@ -199,6 +202,19 @@ document.querySelectorAll(".favoriteBtn").forEach((btn) => {
   });
 });
 
+function capNhatIconCardDangPhat() {
+  document.querySelectorAll(".card").forEach((card, index) => {
+    const icon = card.querySelector(".play-icon");
+    if (!icon) return;
+
+    if (index === vitribai && !isPlaying) {
+      icon.className = "fa-solid fa-pause play-icon";
+    } else {
+      icon.className = "fa-solid fa-play play-icon";
+    }
+  });
+}
+
 function playPause() {
   if (isPlaying) {
     music.play();
@@ -211,6 +227,7 @@ function playPause() {
     music.pause();
     playBtn.innerHTML = `<i class="fa-solid fa-circle-play center-button"></i>`;
   }
+  capNhatIconCardDangPhat();
   console.log("isPlaying =" + isPlaying);
 }
 function doibai(dir) {
@@ -246,7 +263,8 @@ function doibai(dir) {
   isPlaying = true;
   khoitaoSong(vitribai);
   playPause();
-  // console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
+  capNhatIconCardDangPhat();
+  console.log("Bài hiện tại:", vitribai, songs[vitribai].file);
 }
 function displayTime() {
   const { duration, currentTime } = music;
@@ -272,20 +290,40 @@ function formatTime(time) {
 function khoitaoSong(vitribai) {
   const song = songs[vitribai];
   const src = songs[vitribai].image;
+  const wrapper = document.querySelector(".scroll-wrapper");
+  if (!wrapper) {
+    console.error("Không tìm thấy phần tử scroll-wrapper");
+    return;
+  }
   if (!song) {
     console.error("Không tìm thấy bài hát tại vị trí:", vitribai);
     return;
   }
   document.getElementById("favoriteBtn").setAttribute("data-id", song.id);
+  document.getElementById("iconAddPlaylist").setAttribute("data-song_id", song.id);
   nameArtist.textContent = song.artist;
   nameSong.textContent = song.name;
   music.src = song.fileSong;
-  // imgSong.src = song.image;
+  imgSong.src = song.image;
   if (src) {
     imgSong.src = src;
     imgSong.style.display = "block";
   }
+  nameSong.classList.remove("scroll");
+  nameSong.style.animation = "none";
+  nameSong.style.paddingLeft = "0";
+  void nameSong.offsetWidth; // Trigger reflow
+
+  // Sau 100ms kiểm tra nếu cần scroll thì thêm class
+  setTimeout(() => {
+    if (nameSong.scrollWidth > wrapper.clientWidth) {
+      nameSong.classList.add("scroll");
+      nameSong.style.animation = null;
+      nameSong.style.paddingLeft = "100%";
+    }
+  }, 100);
   document.getElementById("favoriteBtn").style.display = "block";
+  document.getElementById("iconAddPlaylist").style.display = "block";
   checkFavorite(song.id);
   if (songs[vitribai]) {
     console.log("Bài hiện tại:", vitribai, songs[vitribai].fileSong);
@@ -296,16 +334,19 @@ function xulyHetbai() {
   if (isRepeat) {
     isPlaying = true;
     playPause();
+    capNhatIconCardDangPhat();
   } else if (isRandom) {
     let vitrimoi;
     do {
       vitrimoi = Math.floor(Math.random() * songs.length);
+      console.log("tổng bài: " + songs.length);
       console.log("vị trí mới: = " + vitrimoi);
     } while (vitribai === vitrimoi);
     isPlaying = true;
     vitribai = vitrimoi;
     khoitaoSong(vitribai);
     playPause();
+    capNhatIconCardDangPhat();
   } else doibai(1);
 }
 function xulyrangeAudio() {
@@ -318,9 +359,11 @@ function onOffRepeat() {
     repeatBtn.classList.remove("active");
   } else {
     isRepeat = true;
-
+    repeatBtn.innerHTML = `<i class="fa-solid fa-repeat"></i>`;
     repeatBtn.classList.add("active");
   }
+  console.log(repeatBtn.classList.contains("active"));
+
   console.log("isRepeat = " + isRepeat);
 }
 function onOffRandom() {
@@ -370,3 +413,75 @@ function checkFavorite(songId) {
       }
     });
 }
+
+document.querySelectorAll(".editBtn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    console.log("Edit button clicked");
+    const card = btn.closest(".mySongs-item");
+    if (!card) {
+      console.error("Card not found for this button!");
+      return;
+    }
+
+    const songData = {
+      id: card.dataset.id,
+      name: card.dataset.name,
+      artist: card.dataset.artist,
+      fileSong: card.dataset.song,
+      image: card.dataset.img,
+    };
+
+    openEditPopup(songData);
+  });
+});
+
+function openEditPopup(songData) {
+  if (!popupEdit) return;
+
+  document.getElementById("edit-id").value = songData.id;
+  document.getElementById("edit-title").value = songData.name;
+  document.getElementById("edit-artist").value = songData.artist;
+  document.getElementById("edit-old-audio").value = songData.fileSong; // lưu file nhạc cũ
+  document.getElementById("edit-old-image").value = songData.image; // lưu ảnh cũ
+  overlay.style.display = "block";
+  popupEdit.style.display = "block";
+}
+
+uploadMusic.addEventListener("click", function () {
+  overlay.style.display = "block";
+  popupUpload.style.display = "block";
+});
+
+document.querySelectorAll(".closePopup").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (overlay) overlay.style.display = "none";
+    if (popupUpload) popupUpload.style.display = "none";
+    if (popupEdit) popupEdit.style.display = "none";
+    if (popupAddPlaylist) popupAddPlaylist.style.display = "none";
+    if (popupEditPlaylist) popupEditPlaylist.style.display = "none";
+    if (playlistPopup) playlistPopup.style.display = "none";
+  });
+});
+
+if (addPlaylistBtn && popupAddPlaylist) {
+  addPlaylistBtn.addEventListener("click", function () {
+    overlay.style.display = "block";
+    popupAddPlaylist.style.display = "block";
+  });
+}
+
+if (editPlaylistBtns.length && popupEditPlaylist) {
+  editPlaylistBtns.forEach((btn) => {
+    btn.addEventListener("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      const playlistId = this.dataset.playlistId;
+      const playlistName = this.dataset.playlistName || "";
+      document.getElementById("edit-playlist-id").value = playlistId;
+      document.getElementById("edit-playlist-name").value = playlistName;
+      overlay.style.display = "block";
+      popupEditPlaylist.style.display = "block";
+    });
+  });
+}
+

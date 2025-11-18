@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminNvt</title>
+    <title>AdminNĐT</title>
     <!-- Remix Icon: đẹp, phổ biến, hiện đại -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
@@ -13,7 +13,8 @@
             height: 100%;
             margin: 0;
             padding: 0;
-            background-color: #170f23;
+            /* background-color: #170f23; */
+            background-color: #151515;
             font-family: Arial, sans-serif;
             color: #fff;
         }
@@ -21,11 +22,14 @@
         .layout {
             display: flex;
             min-height: 100vh;
+            background-image: linear-gradient(180deg, #32dfd424, #a6ffc20f 32.83%, #1414140d 69.71%, #14141400);
         }
 
         .sidebar {
             width: 240px;
-            background-color: #231b2e;
+            background-color: #ffffff0a;
+            scrollbar-color: hsla(0, 0%, 100%, .24) transparent;
+            scrollbar-width: thin;
             padding: 20px 16px;
             display: flex;
             flex-direction: column;
@@ -66,7 +70,7 @@
 
         .menu-link:hover,
         .menu-link.active {
-            background-color: #3a3344;
+            background-color: #454249ff;
             opacity: 0.9;
         }
 
@@ -94,6 +98,7 @@
             flex: 1;
             padding: 20px;
             padding-bottom: 100px;
+
         }
 
         .main-content h2 {
@@ -101,7 +106,7 @@
         }
 
         .btn-custom {
-            background-color: #9b4de0;
+            /* background-color: #9b4de0; */
             color: #fff;
             padding: 6px 12px;
             border-radius: 4px;
@@ -112,24 +117,31 @@
         }
 
         .btn-custom:hover {
-            background-color: #b86aff;
+            /* background-color: #b86aff; */
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #231b2e;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
         }
 
         th,
         td {
+            align-items: center;
+            /* gap: 15px; */
             padding: 10px;
-            text-align: center;
-            border: 1px solid #3a3344;
+            margin-bottom: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+            /* text-overflow: ellipsis; */
+            max-width: 300px;
+            overflow: hidden;
         }
 
         th {
-            background-color: #2e253a;
+            /* background-color: #2e253a; */
         }
 
         img.img-thumbnail {
@@ -154,6 +166,16 @@
 
         .delete-btn {
             background-color: #dc3545;
+        }
+
+        .flash-admin {
+            padding: 12px 18px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            background-color: #1f8a70;
+            color: #fff;
+            font-weight: bold;
+            display: inline-block;
         }
 
         .player-bar {
@@ -269,7 +291,7 @@
     <div class="layout">
         <div class="sidebar">
             <!-- <img src="./../admin/1/img/php.png" alt="logo" class="logo"> -->
-             <h2>Quản lý</h2>
+            <h2>Quản lý</h2>
             <ul class="menu">
                 <li>
                     <a href="index.php?controller=admin&action=index" class="menu-link">
@@ -287,12 +309,17 @@
                     </a>
                 </li>
                 <li>
-                    <a href="index.php?controller=auth&action=logout" class="menu-link">
-                         🚪 Đăng Xuất
+                    <a href="index.php?controller=admin&action=genres" class="menu-link">
+                        <i class="ri-music-2-line"></i> Quản lý thể loại
                     </a>
                 </li>
-                
-                    <!-- <li>
+                <li>
+                    <a href="index.php?controller=auth&action=logout" class="menu-link">
+                        🚪 Đăng Xuất
+                    </a>
+                </li>
+
+                <!-- <li>
                         <a href="index.php?controller=user&action=index" class="menu-link">
                             Trang uer 
                         </a>
@@ -301,9 +328,15 @@
 
         </div>
         <div class="main-content">
-            <?php echo  $content ?? '' ?>
+            <?php if (!empty($_SESSION['flash_message'])): ?>
+                <div class="flash-admin">
+                    <?= $_SESSION['flash_message']; ?>
+                </div>
+                <?php unset($_SESSION['flash_message']); ?>
+            <?php endif; ?>
+            <?php echo $content ?? '' ?>
         </div>
-        
+
     </div>
 </body>
 

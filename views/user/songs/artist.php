@@ -1,0 +1,17 @@
+<h2><?= htmlspecialchars($artistName) ?></h2>
+<div class="playlist-container">
+    <?php foreach ($songs as $index => $song): ?>
+        <div class="card list-item" data-playlist="all" data-index="<?= $index; ?>" data-id="<?= $song['id']; ?>"
+            data-name="<?= $song['name']; ?>" data-img="<?= $song['image']; ?>" data-artist="<?= $song['artist']; ?>"
+            data-song="<?= $song['fileSong']; ?>">
+            <img src="<?= $song['image'] ?>" alt="" class="thumbnail">
+            <div class="play-btn">
+                <i class="fa-solid fa-play play-icon"></i>
+            </div>
+            <div class="info">
+                <h3><?= htmlspecialchars(string: $song['name']) ?></h3>
+                <p><?= htmlspecialchars($song['artist']) ?></p>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>

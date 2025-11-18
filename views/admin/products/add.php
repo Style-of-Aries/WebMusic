@@ -3,9 +3,10 @@ ob_start();
 ?>
 <style>
     form.song-form {
-        background-color: #231b2e;
         padding: 24px;
         border-radius: 8px;
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
         /* max-width: 600px; */
         width: 50%;
         /* height: 70%; */
@@ -23,19 +24,19 @@ ob_start();
     input[type="file"],
     select {
         padding: 10px;
-        border: none;
+        background-color: #5d646eff;
+        border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 4px;
-        background-color: #2e253a;
         color: white;
-        width: 100%;
+        width: 95%;
         outline: none;
     }
 
     input[type="submit"] {
         padding: 12px;
-        background-color: #9b4de0;
+        background-color: #00D3E5;
         border: none;
-        color: white;
+        color: #black;
         font-weight: bold;
         cursor: pointer;
         border-radius: 4px;
@@ -44,7 +45,7 @@ ob_start();
     }
 
     input[type="submit"]:hover {
-        background-color: #b86aff;
+        background-color: #3a8b93ff;
     }
 </style>
 
@@ -65,6 +66,21 @@ ob_start();
     <div>
         <label for="audio">File nhạc (.mp3):</label>
         <input type="file" id="audio" name="audio" accept="audio/*" >
+    </div>
+    <div>
+        <label for="genre">Thể loại:</label>
+        <?php if (!empty($genres)): ?>
+            <select name="genre" id="genre" required>
+                <?php foreach ($genres as $genre): ?>
+                    <option value="<?= htmlspecialchars($genre['name']) ?>">
+                        <?= htmlspecialchars($genre['name']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        <?php else: ?>
+            <p style="color:#bbb; font-size:14px;">Chưa có thể loại nào. Hãy tạo tại mục "Quản lý thể loại".</p>
+            <input type="hidden" name="genre" value="Khác">
+        <?php endif; ?>
     </div>
     <input type="submit" value="Thêm bài hát" name="btn_add">
 </form>

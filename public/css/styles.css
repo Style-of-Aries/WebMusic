@@ -1,9 +1,9 @@
 :root {
-  --layout-bg: #170f23;
+  --layout-bg: #151515;
   --layout-header-bg: rgba(55, 7, 93, 0.8);
   --queue-player-popup-bg: #2f054e;
   --purple-primary: #ed2b91;
-  --primary-bg: #4b1178;
+  --app-primary-color: #00d3e5;
   --sidebar-popup-bg: #231b2e;
 }
 
@@ -21,7 +21,14 @@ body {
 .main {
   display: flex;
   height: 100vh;
-  background: url(../img/068fba01b5a5d8181a6dcee0847cada4.jpg) no-repeat;
+  /* background: url(../img/068fba01b5a5d8181a6dcee0847cada4.jpg) no-repeat; */
+  background-image: linear-gradient(
+    180deg,
+    #32dfd424,
+    #a6ffc20f 32.83%,
+    #1414140d 69.71%,
+    #14141400
+  );
   background-position: center;
   background-size: cover;
 
@@ -112,14 +119,27 @@ body {
 
 .sidebar {
   width: 200px;
+  z-index: 20;
+  /* backdrop-filter: blur(20px); */
 
-  backdrop-filter: blur(20px);
+  background-color: #ffffff0a;
+  height: calc(100vh - 100px);
+  scrollbar-color: hsla(0, 0%, 100%, 0.24) transparent;
+  scrollbar-width: thin;
   position: fixed;
   left: 0;
   top: 0;
   bottom: 0;
   transition: width 0.3s;
   color: white;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .sidebar-content .nav-ul {
@@ -140,14 +160,20 @@ body {
   color: #fff;
   width: 100%;
   padding: 15px 0;
+  font-weight: bold;
 }
 
 .sidebar-content .nav-ul .nav-li a i {
   margin: 0 15px;
 }
 
-.sidebar-content .nav-ul .nav-li a:hover {
+.sidebar-content .nav-ul .nav-li a:hover,
+.sidebar-content .nav-ul .nav-li a.active {
   background: #292929;
+  border-radius: 6px;
+  width: 90%;
+  margin: 0 auto;
+  box-shadow: 0 0 30px #70707540;
 }
 
 .container {
@@ -170,7 +196,7 @@ body {
   top: 0;
   width: calc(100% - 200px);
   transition: width 0.3s;
-  z-index: 999;
+  z-index: 20;
   backdrop-filter: blur(20px);
 }
 
@@ -182,7 +208,7 @@ body {
   margin-left: 50px;
   width: 500px;
 }
-
+/* 
 .header .homeSearch input {
   font-size: 16px;
   width: 100%;
@@ -190,9 +216,22 @@ body {
   border: none;
   border-radius: 999px;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  background: transparent;
+  background-color: #ffffff29;
   color: #fff;
   outline: none;
+} */
+.header .homeSearch input {
+  background-color: #ffffff29;
+  border: 1px solid transparent;
+  border-radius: 40px;
+  color: #fff;
+  height: 35px;
+  width: 100%;
+  /* padding: 10px; */
+  font-size: 16px;
+  padding-left: 40px;
+  outline: none;
+  transition: border 0.3s;
 }
 
 .header .homeSearch input::placeholder {
@@ -200,9 +239,13 @@ body {
   opacity: 70%;
 }
 
+.header .homeSearch input:focus {
+  border: 1px solid #fff;
+}
+
 .header .homeSearch button {
   position: absolute;
-  right: 10px;
+  left: 10px;
   background: none;
   border: none;
   cursor: pointer;
@@ -213,10 +256,122 @@ body {
   font-size: 20px;
 }
 
+.header .uploadMusic {
+  position: relative;
+  display: inline-block;
+  margin-right: 80px;
+  background-color: var(--app-primary-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.header .uploadMusic a {
+  text-decoration: none;
+  color: #fff;
+}
+.header .uploadMusic a i {
+  font-size: 20px;
+}
 .header .avatarUser {
   position: relative;
   display: inline-block;
   margin-right: 50px;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8); /* độ mờ */
+  backdrop-filter: blur(3px); /* nếu muốn blur */
+  display: none; /* ẩn mặc định */
+  z-index: 10;
+}
+
+#overlay.active {
+  display: block;
+}
+
+.closePopup {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.closePopup i {
+  font-size: 20px;
+  color: #fff;
+}
+.closePopup:hover {
+  background: #292929;
+}
+.popupUpload {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background: transparent;
+  width: 500px;
+  backdrop-filter: blur(20px);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+.popupUpload-content {
+  padding: 20px;
+}
+.popupUpload-content h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.popupUpload-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popupUpload-content form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.popupUpload-content form input {
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+}
+
+.popupUpload-content form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #00d3e5;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+.popupUpload-content form button:hover {
+  background-color: #3a8b93ff;
+  color: #fff;
+}
+.popupUpload-content #genre {
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+}
+
+.popupUpload-content #genre option {
+  background-color: #333;  /* màu nền cho option */
+  color: #fff;             /* chữ trắng */
 }
 
 .header .avatarUser img {
@@ -232,11 +387,11 @@ body {
   position: absolute;
   right: 0;
   top: 110%;
-  background-color: white;
+  background-color: #292929 !important;
   border: 1px solid #ccc;
   border-radius: 6px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  min-width: 160px;
+  box-shadow: 0 0 30px #70707540;
+  width: 200px;
   z-index: 9999;
 }
 
@@ -244,16 +399,18 @@ body {
   display: block;
   padding: 10px 15px;
   text-decoration: none;
-  color: #333;
+  color: #fff;
 }
 
 .dropdownMenu a:hover {
   background-color: #f2f2f2;
+  color: #000;
+  transition: all 0.3s ease;
 }
 .dropdownMenu .username {
   padding: 10px 15px;
   font-weight: bold;
-  color: #000;
+  color: #fff;
   border-bottom: 1px solid #eee;
   word-break: break-word;
   white-space: nowrap;
@@ -270,7 +427,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 45px;
-  background: #fff;
+  background: var(--app-primary-color);
   border: none;
   outline: none;
   border-radius: 40px;
@@ -288,8 +445,9 @@ body {
   width: 100%;
   margin-top: 16px;
   display: flex;
-  gap: 25px;
+  gap: 60px;
   overflow-y: hidden;
+  flex-wrap: wrap;
 }
 .playlist-container::-webkit-scrollbar {
   height: 6px;
@@ -355,6 +513,8 @@ body {
 .info h3 {
   margin: 0;
   font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .info p {
@@ -373,11 +533,12 @@ body {
   width: 100%;
   height: 100px;
   /* hoặc chiều cao bạn muốn */
-  backdrop-filter: blur(20px);
+  /* backdrop-filter: blur(20px); */
+  background: #212121;
   color: white;
   display: flex;
   align-items: center;
-  z-index: 20;
+  z-index: 50;
   /* cao hơn sidebar */
 }
 
@@ -388,6 +549,15 @@ body {
   position: relative;
 }
 
+@keyframes scroll-text {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 .inforSong .imageSong img {
   width: 70px;
   height: 70px;
@@ -396,21 +566,45 @@ body {
   border-radius: 15px;
 }
 
-.inforSong .textInfor {
-  margin: 0 5px;
-  display: flex;
-  flex-direction: column;
+.textInfor {
+  width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.inforSong .textInfor .nameSong {
+.textInfor .scroll-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.nameSong {
+  display: inline-block;
   font-weight: bold;
   margin-bottom: 10px;
   font-size: 1.2em;
+  white-space: nowrap;
+  padding-left: 100%; /* Bắt đầu từ ngoài khung */
+  animation: scroll-text 10s linear infinite;
+}
+
+@keyframes scroll-text {
+  0% {
+    transform: translateX(calc(0% - 250px));
+  }
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .inforSong .textInfor .nameArtist {
   font-size: 0.7em;
   color: #b2b0b6;
+}
+.iconAddPlaylist {
+  font-size: 1.2em;
+  cursor: pointer;
+  display: none;
 }
 .favoriteBtn {
   margin-left: 60px;
@@ -423,7 +617,7 @@ body {
   right: 0;
 }
 .favoriteBtn:hover {
-  color: #ff8efb;
+  color: #bdbdbd;
 }
 .player-controls {
   display: flex;
@@ -446,23 +640,30 @@ body {
   font-size: 20px;
   cursor: pointer;
   transition: color 0.3s;
+  /* color: #bdbdbd; */
 }
-
-.control-buttons i:hover {
-  color: #ff8efb;
+.control-buttons #playBtn i {
+  font-size: 40px;
+  color: #fff;
 }
+.control-buttons #playBtn i:hover {
+  color: #bdbdbd;
+}
+/* .control-buttons i:hover {
+  color :#fff;
+} */
 
 .control-buttons .center-button {
   font-size: 32px;
 }
 
 #repeatBtn.active {
-  color: #ff8efb;
+  color: var(--app-primary-color);
   /* hoặc màu bạn muốn khi bật */
 }
 
 #randomBtn.active {
-  color: #ff8efb;
+  color: var(--app-primary-color);
   /* hoặc màu bạn muốn khi bật */
 }
 
@@ -490,7 +691,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 100%;
+  width: 80%;
   color: white;
   font-size: 12px;
 }
@@ -500,7 +701,16 @@ input[type="range"] {
   accent-color: #fff;
   height: 5px;
 }
-
+input[type="range"]:hover {
+  cursor: pointer;
+  background: var(--app-primary-color);
+}
+input[type="range"]::-webkit-slider-thumb {
+  opacity: 0;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+  opacity: 1;
+}
 .playSong-left {
   display: flex;
   align-items: center;
@@ -520,7 +730,7 @@ input[type="range"] {
 }
 
 .volume #volumeBtn:hover {
-  color: #ff8efb;
+  color: var(--app-primary-color);
 }
 
 /*========================== BXH =========================*/
@@ -583,18 +793,28 @@ input[type="range"] {
 .bxh-title {
   font-weight: 600;
   color: white;
-  width: 30%;
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
 }
 
 .bxh-artist {
   color: #ccc;
   font-size: 14px;
   width: 40%;
+  margin-left: 50px;
+  overflow: hidden;
+  white-space: nowrap; /* Không cho xuống dòng */
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
 }
 #bxh-timeSong {
   color: #827f7f;
   font-size: 12px;
+  width: 80px;
+  margin-left: 100px;
 }
+/*========================== Favorites =========================*/
 .favorite-item {
   display: flex;
   align-items: center;
@@ -739,4 +959,601 @@ input[type="range"] {
 }
 .noFind {
   text-align: center;
+}
+.artist {
+  position: relative;
+}
+.artist:hover .artist-ul {
+  display: block;
+}
+
+.artist-ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  backdrop-filter: blur(20px);
+  overflow-y: auto;
+}
+.artist-ul .artist-li {
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  display: block;
+  min-height: 40px;
+  white-space: nowrap; /* Không cho xuống dòng */
+  overflow: hidden; /* Ẩn phần vượt giới hạn */
+  text-overflow: ellipsis;
+}
+
+/*========================== My Songs Buttons =========================*/
+.btnMySongs {
+  display: flex;
+  gap: 10px;
+}
+.btnMySongs button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  padding: 10px 10px;
+}
+.btnMySongs button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.btnMySongs button i {
+  font-size: 16px;
+}
+
+.btnMySongs a .deleteBtn {
+  color: red;
+}
+
+.popupEdit {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background: transparent;
+  width: 500px;
+  backdrop-filter: blur(20px);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+.popupEdit-content {
+  padding: 20px;
+}
+.popupEdit-content h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.popupEdit-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popupEdit-content form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.popupEdit-content form input {
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+}
+
+.popupEdit-content form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #00d3e5;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.popupEdit-content form button:hover {
+  background-color: #3a8b93ff;
+  color: #fff;
+}
+
+.mySongs-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+}
+
+.mySongs-item:hover {
+  background: #292929;
+}
+
+.mySongs-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: transparent; /* Không tô màu chữ */
+  -webkit-text-stroke: 1.5px #fff; /* Viền xanh lam */
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+
+.mySongs-thumb-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.mySongs-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.mySongs-thumb-wrapper .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 999px;
+  display: none;
+  z-index: 2;
+}
+
+.mySongs-thumb-wrapper:hover .play-btn {
+  display: block;
+}
+
+.mySongs-title {
+  font-weight: 600;
+  color: white;
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
+}
+
+.mySongs-artist {
+  color: #ccc;
+  font-size: 14px;
+  width: 40%;
+  margin-left: 50px;
+  overflow: hidden;
+  white-space: nowrap; /* Không cho xuống dòng */
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
+}
+#mySongs-timeSong {
+  color: #827f7f;
+  font-size: 12px;
+  width: 80px;
+  margin-left: 100px;
+}
+
+.profile {
+  display: flex;
+  height: 150px;
+  /* background-color: var(--layout-bg); */
+}
+.profile img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 15px;
+  object-fit: cover;
+}
+.profile .usernameProfile {
+  color: white;
+  margin: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 50px;
+}
+
+.playlist {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.playlist i {
+  color: white;
+  border: 1px solid white;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.mySongs-list {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.mySongs-list a {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+  flex: 1;
+  display: block;
+  height: 100px;
+  background-color: #82828233;
+  border-radius: 20px;
+  font-weight: bold;
+  align-items: center;
+  margin-top: 20px;
+}
+.yeuThich {
+  margin-top: 25px;
+  margin-left: 10px;
+}
+.uploadedSongs {
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+.songsCount {
+  margin-top: 10px;
+  color: #b2b0b6;
+}
+
+#playlistPopup {
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background: transparent;
+  width: 500px;
+  backdrop-filter: blur(20px);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+#playlistPopup .btnplaylistPopup {
+  margin-bottom: 10px;
+  display: flex;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #82828233;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  align-items: center;
+  width: 100%;
+}
+#playlistPopup button img {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+}
+#playlistPopup button:hover {
+  background-color: #3a8b93ff;
+  color: #fff;
+}
+.popupAddPlaylist {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background: transparent;
+  width: 500px;
+  backdrop-filter: blur(20px);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+.popupAddPlaylist-content {
+  padding: 20px;
+}
+.popupAddPlaylist-content h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.popupAddPlaylist-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popupAddPlaylist-content form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.popupAddPlaylist-content form input {
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+}
+
+.popupAddPlaylist-content form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #00d3e5;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.popupAddPlaylist-content form button:hover {
+  background-color: #3a8b93ff;
+  color: #fff;
+}
+
+.popupEditPlaylist {
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 35%;
+  background: transparent;
+  width: 500px;
+  backdrop-filter: blur(20px);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+.popupEditPlaylist-content {
+  padding: 20px;
+}
+.popupEditPlaylist-content h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.popupEditPlaylist-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.popupEditPlaylist-content form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+.popupEditPlaylist-content form input {
+  padding: 10px;
+  border: 3px solid #ccc;
+  border-radius: 6px;
+  background: transparent;
+  color: #fff;
+}
+
+.popupEditPlaylist-content form button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #00d3e5;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+.popupEditPlaylist-content form button:hover {
+  background-color: #3a8b93ff;
+  color: #fff;
+}
+.flash {
+  display: block;
+  padding: 12px 18px;
+  background: #e3f6e5;
+  color: #0a5c1c;
+  border-radius: 6px;
+  margin: 10px 0;
+  font-weight: bold;
+  z-index: 1000;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+  transition: all 0.3s ease;
+}
+
+.khungPlaylist {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 10px;
+  overflow-x: auto;
+  flex-wrap: wrap;
+}
+
+
+.playlist-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.playlist-item {
+  width: 220px;
+  background: rgba(41, 41, 41, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.playlist-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.35);
+}
+.playlist-link {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.playlist-link span {
+  font-weight: 600;
+  font-size: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.songsCount {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+.playlist-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+.playlist-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.playlist-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+.playlist-btn.edit {
+  color: #00d3e5;
+}
+.playlist-btn.delete {
+  color: #ff5f6d;
+}
+
+.playlistSongs-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+}
+
+.playlistSongs-item:hover {
+  background: #292929;
+}
+
+.playlistSongs-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: transparent; /* Không tô màu chữ */
+  -webkit-text-stroke: 1.5px #fff; /* Viền xanh lam */
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  width: 80px;
+}
+
+.playlistSongs-thumb-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.playlistSongs-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.playlistSongs-thumb-wrapper .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 8px;
+  border-radius: 999px;
+  display: none;
+  z-index: 2;
+}
+
+.playlistSongs-thumb-wrapper:hover .play-btn {
+  display: block;
+}
+
+.playlistSongs-title {
+  font-weight: 600;
+  color: white;
+  width: 40%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
+}
+
+.playlistSongs-artist {
+  color: #ccc;
+  font-size: 14px;
+  width: 40%;
+  margin-left: 50px;
+  overflow: hidden;
+  white-space: nowrap; /* Không cho xuống dòng */
+  text-overflow: ellipsis; /* Hiển thị dấu "..." nếu quá dài */
+}
+#playlistSongs-timeSong {
+  color: #827f7f;
+  font-size: 12px;
+  width: 80px;
+  margin-left: 100px;
+}
+.playlistSongs-removeForm {
+  margin-left: auto;
+}
+.playlistSongs-removeBtn {
+  border: none;
+  background: rgba(255, 95, 109, 0.15);
+  color: #ff5f6d;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.playlistSongs-removeBtn:hover {
+  background: rgba(255, 95, 109, 0.3);
+  transform: translateY(-1px);
 }

@@ -27,9 +27,9 @@ class authModel extends database
         }
     }
     // Thêm tài khoản vào bảng users
-    public function authUsers($userNameRegister,$emailRegister,$passRegister,$sdtRegister){
+    public function authUsers($userNameRegister,$emailRegister,$passRegister,$sdtRegister,$imageRegister){
 
-        $sql="INSERT INTO users(username,email,password,sodienthoai) VALUES ('$userNameRegister','$emailRegister','$passRegister','$sdtRegister')";
+        $sql="INSERT INTO users(username,email,password,sodienthoai,image) VALUES ('$userNameRegister','$emailRegister','$passRegister','$sdtRegister','$imageRegister')";
         $query=$this->__query($sql);
     }
     //end register

@@ -20,7 +20,6 @@ class authController
     public function auth_login()
     {
         $errorLogin = "";
-        // echo "<br>" . __METHOD__;
         if (isset($_POST['btn_login'])) {
             $emailLogin = $_POST['email'];
             $passLogin = $_POST['password'];
@@ -28,18 +27,15 @@ class authController
                 header('location:index.php?controller=admin&action=index');
             }
             $user = $this->authModel->authUsersLogin($emailLogin, $passLogin);
-            // var_dump($user);
             if ($user) {
                 session_start();
                 $_SESSION['user'] = $user;
-                header('location:index.php?controller=user&action=index');
+                header('location:index.php?controller=user');
                 exit();
             } else {
                 $errorLogin = "Thông tin tài khoản mật khẩu không chính xác";
                 include_once "./../views/auth/login.php";
             }
-            // header('location:index.php?controller=user&action=index');
-
         }
     }
 
@@ -118,7 +114,7 @@ class authController
             $passRegister = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
             $sdtRegister = $_POST['phone'];
-
+            $imageRegister = $_POST['image'] ?? '';
             // Validate từng trường
             if (empty($userNameRegister)) {
                 $errorName = "Vui lòng không để trống";
@@ -153,13 +149,18 @@ class authController
             } else {
                 $vlSdt = $sdtRegister;
             }
-
-            // Nếu không có lỗi thì đăng ký và chuyển trang
+            if(empty($imageRegister)){
+                $errorImage = "Vui lòng chọn ảnh";
+            }
+            if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK){
+                $imageRegister = './../public/uploads/img/' . basename($_FILES['image']['name']);
+                move_uploaded_file($_FILES['image']['tmp_name'], $imageRegister);
+            }
             if (
                 empty($errorName) && empty($errorEmail) && empty($errorPass)
                 && empty($errorCfPass) && empty($errorsdt)
             ) {
-                $this->authModel->authUsers($userNameRegister, $emailRegister, $passRegister, $sdtRegister);
+                $this->authModel->authUsers($userNameRegister, $emailRegister, $passRegister, $sdtRegister, $imageRegister);
 
                 // ✅ Chuyển hướng đến trang login và dừng lại
                 $this->login();
@@ -178,7 +179,7 @@ class authController
         session_start();
         session_unset();
         session_destroy();
-        header("Location: index.php?controller=auth&action=login");
+        header("Location: index.php?controller=user");
         exit();
     }
 }

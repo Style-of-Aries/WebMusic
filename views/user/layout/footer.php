@@ -4,8 +4,13 @@
             <img id="imgSong" src="" alt="" onerror="this.style.display='none';">
         </div>
         <div class="textInfor">
-            <div id="nameSong" class="nameSong"></div>
+            <div class="scroll-wrapper">
+                <div id="nameSong" class="nameSong"></div>
+            </div>
             <div id="nameArtist" class="nameArtist"></div>
+        </div>
+        <div id="iconAddPlaylist" class="iconAddPlaylist">
+            <i class="fa-solid fa-square-plus"></i>
         </div>
         <div id="favoriteBtn" class="favoriteBtn" data-id="">
             <i class="fa-regular fa-heart"></i>

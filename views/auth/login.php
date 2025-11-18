@@ -9,17 +9,12 @@
   ?>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>css/auth.css">
-  <!-- <link rel="stylesheet" href="<?= BASE_URL ?>css/styles.css"> -->
   </style>
 </head>
 
 <body >
-  
   <div class="khung">
-    <!-- <div class="logoWeb">
-      <img src="<?= BASE_URL ?>img/logoMusic.jpg" alt="">
-    </div> -->
-    <form action="index.php?action=auth_login" method="post">
+    <form action="index.php?controller=auth&action=auth_login" method="post">
       <h2>Đăng nhập</h2>
 
       <div class="input-box">
@@ -42,7 +37,7 @@
       <button type="submit" name="btn_login" class="btn">Đăng nhập</button>
 
       <div class="register-link">
-        <p>Bạn chưa có tài khoản? <a href="index.php?action=register">Đăng ký</a></p>
+        <p>Bạn chưa có tài khoản? <a href="index.php?controller=auth&action=register">Đăng ký</a></p>
       </div>
     </form>
 
